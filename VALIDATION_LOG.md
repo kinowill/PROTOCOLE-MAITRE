@@ -118,3 +118,14 @@
   SM-01…SM-06, et statut de SM-07 renseigné.
 - **Statut** : réussi après correction.
 - **Limites** : contrôle documentaire ; pas de validation comportementale.
+
+## 2026-09-23 — Outil pilote : opencode → DeepSeek Harness
+
+- **Fait constaté** : l'auteur n'utilise plus opencode au quotidien ; le
+  pilote actuel est DeepSeek Harness.
+- **Conséquences documentaires** : adaptateur opencode marqué « historique,
+  maintenu pour compatibilité » ; adaptateur harness-dsh marqué « pilote
+  quotidien » ; périmètre de test du design et roadmap alignés ; aucune
+  installation globale opencode effectuée (sans objet).
+- **Statut** : réussi (aucune bascule de config nécessaire).
+- **Limites** : SM-01…SM-06 toujours non exécutés.

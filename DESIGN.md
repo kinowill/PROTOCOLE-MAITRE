@@ -178,8 +178,9 @@ instantané, succès simulé interdit) mais ne peut pas la garantir absolument.
   test du maître, trois états, reprise après compaction, installations
   global/projet/hybride. Chaque entrée consigne : outil, modèle, version du
   noyau, date, résultat, preuve.
-- Périmètre de test réaliste : opencode (pilote), harness-dsh (actuel),
-  generic (fumée). Releases semver avec changelog.
+- Périmètre de test réaliste : DeepSeek Harness (pilote quotidien),
+  generic (fumée). opencode maintenu pour compatibilité, plus utilisé par
+  l'auteur. Releases semver avec changelog.
 
 ## 11. Risques résiduels
 
@@ -199,7 +200,7 @@ instantané, succès simulé interdit) mais ne peut pas la garantir absolument.
 2. Extraction de la référence depuis v1.4 par déplacement de texte ;
    contrôles diff (à la Codex).
 3. Installations locales de test + `install-check.ps1`.
-4. Exécution des scénarios en sessions réelles (opencode, harness-dsh, generic)
+4. Exécution des scénarios en sessions réelles (DeepSeek Harness, generic)
    avec preuves consignées.
 5. Création du repo GitHub `kinowill/PROTOCOLE-MAITRE` + push.
 6. Tag `v1.0.0` + release.

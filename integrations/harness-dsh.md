@@ -1,6 +1,7 @@
 # Adaptateur — DeepSeek Harness (DSH)
 
 Outil en interface web, sessions liées à un espace de travail local.
+Pilote quotidien de l'auteur.
 
 ## Surfaces d'injection connues
 

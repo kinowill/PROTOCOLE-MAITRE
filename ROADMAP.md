@@ -6,7 +6,8 @@
 
 ## À faire
 
-- [ ] Installer le noyau globalement (opencode + DeepSeek Harness).
+- [ ] Généraliser l'usage de la skill `protocole-maitre` dans les sessions
+  DeepSeek Harness (chargement à chaque session).
 - [ ] Décider : pointeurs dans les README des 3 anciens repos.
 
 ## Fait
