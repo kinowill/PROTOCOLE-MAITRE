@@ -1,0 +1,35 @@
+﻿name: CI
+
+on: [push, pull_request]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Garde-fou noyau ≤ 3 Ko
+        run: |
+          size=$(wc -c < NOYAU.md)
+          echo "NOYAU.md = $size octets"
+          if [ "$size" -gt 3072 ]; then echo "ERREUR : noyau > 3 Ko"; exit 1; fi
+
+      - name: Sections de la référence
+        run: |
+          count=$(grep -c '^## ' PROTOCOLE.md)
+          echo "$count sections de niveau 2"
+          if [ "$count" -lt 14 ]; then echo "ERREUR : sections manquantes"; exit 1; fi
+
+      - name: Aucune règle normative dans les adaptateurs
+        run: |
+          if grep -l -i -E 'interdit|obligatoire|non négociable|non-negociable' integrations/*.md; then
+            echo "ERREUR : règle normative trouvée dans un adaptateur"; exit 1
+          fi
+          echo "Aucune règle normative détectée."
+
+      - name: Adaptateurs présents
+        run: |
+          for f in opencode harness-dsh codex claude-code generic; do
+            test -f "integrations/$f.md" || { echo "ERREUR : integrations/$f.md manquant"; exit 1; }
+          done
+          echo "5 adaptateurs présents."
