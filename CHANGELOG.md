@@ -13,7 +13,7 @@ et version inclus. Le noyau prime sur la référence.
 **Référence** — `PROTOCOLE.md` : 15 sections, 23 692 octets (v1.4 DeepSeek :
 32 197). Redondances éliminées (`gh` unique, surfaces d'instructions uniques),
 détails d'outil externalisés, contexte/compaction généralisé, section
-« Outils et adaptateurs » nouvelle, déviation consignée ajoutée (section 8).
+« Outils et adaptateurs » nouvelle, déviation consignée ajoutée (section 9).
 
 **Adaptateurs** — opencode, DeepSeek Harness, Codex CLI, Claude Code,
 générique. Contenu : surfaces d'injection, fonctionnalités, valeurs propres,
@@ -31,5 +31,6 @@ grep anti-règles dans les adaptateurs, présence des adaptateurs).
 la CI. Ajouté après l'incident « chemins personnels sur dépôt public ».
 
 **Divergences assumées vs PROTOCOLE-CODEX v1.4** — sections 12-13
-généralisées ; section 13 remplacée par « Outils et adaptateurs » ; `gh`
-dédupliqué ; section 8 enrichie. Alignement souple, documenté ici.
+généralisées ; « Outils et adaptateurs » remplace l'ancienne section 13 ;
+déviation consignée ajoutée ; `gh` dédupliqué. Alignement souple, documenté
+ici.

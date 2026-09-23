@@ -105,3 +105,16 @@
   re-exécutés après correction.
 - **Limites** : SM-01…SM-06 toujours non exécutés (nécessitent des sessions
   réelles).
+
+## 2026-09-23 — Cohérence documentaire (audit des renvois)
+
+- **Contrôles** : tous les renvois numériques (sections, blocs, scénarios)
+  vérifiés après l'insertion de la section Sécurité.
+- **Écarts trouvés et corrigés** : 2 renvois périmés dans `CHANGELOG.md`
+  (« déviation consignée (section 8) » → section 9 ; bullet « Divergences »
+  avec ancienne numérotation). Renvois vérifiés corrects par ailleurs :
+  `PROTOCOLE.md` (§9, §12), `generic.md` (§12), `opencode.md` (SM-01).
+- **Ajout** : prompts d'essai exacts dans `VALIDATION_SCENARIOS.md` pour
+  SM-01…SM-06, et statut de SM-07 renseigné.
+- **Statut** : réussi après correction.
+- **Limites** : contrôle documentaire ; pas de validation comportementale.
