@@ -1,4 +1,4 @@
-# PROTOCOLE MAITRE — Noyau v1.0
+# PROTOCOLE MAITRE — Noyau v1.0.0
 
 Règles non négociables, chargées à chaque session. La référence explique ;
 ce noyau ordonne. En cas de conflit, ce noyau gagne.

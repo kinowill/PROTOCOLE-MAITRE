@@ -1,6 +1,6 @@
 # Changelog — PROTOCOLE MAITRE
 
-## v1.0.0-candidate (2026-09-23)
+## v1.0.0 (2026-09-23)
 
 **Convergence** — un protocole unique remplace trois copies divergentes :
 PROTOCOLE-CLAUDE v1.2, PROTOCOLE-CODEX v1.4, PROTOCOLE-DEEPSEEK v1.4

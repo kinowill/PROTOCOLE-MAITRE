@@ -7,7 +7,7 @@
 
 ## Fait
 
-- [x] v1.0.0-candidate : noyau, référence, 5 adaptateurs, templates, outils, CI.
+- [x] v1.0.0 : noyau, référence, 5 adaptateurs, templates, outils, CI.
 
 ## Bloqué
 

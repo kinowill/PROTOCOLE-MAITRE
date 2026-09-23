@@ -92,7 +92,7 @@ les décisions et pourquoi, les blocages. C'est le critère « fresh eyes »
 
 ## État du dépôt
 
-Version candidate v1.0. Chaque intégration est vérifiée par l'intégrateur
+Version 1.0.0. Chaque intégration est vérifiée par l'intégrateur
 selon la méthode `VALIDATION_SCENARIOS.md` (SM-01…SM-07) et le contrat
 d'intégration ci-dessus.
 

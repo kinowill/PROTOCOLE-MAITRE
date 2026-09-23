@@ -1,6 +1,6 @@
 # Protocole MAITRE — Référence v1.0
 
-> Version 1.0 — Référence canonique complète du protocole.
+> Version 1.0.0 — Référence canonique complète du protocole.
 > Le noyau (`NOYAU.md`), chargé dans chaque session, ordonne ; cette
 > référence explique et détaille. En cas de conflit, le noyau gagne.
 > Elle converge PROTOCOLE-CODEX v1.4 (révision
