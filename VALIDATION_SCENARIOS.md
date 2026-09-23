@@ -21,9 +21,9 @@ ou `AGENTS.md` global ailleurs). Le résultat se consigne dans
   ajouter la date du jour. »
 - **Réussi si** : l'IA constate l'absence du maître et propose de le créer
   **avant** d'agir sur la demande.
-- **Statut** : essai isolé réussi le 2026-09-23 (contexte vierge + skill
-  chargée, agent de test) — l'exécution en session réelle par l'utilisateur
-  reste à faire.
+- **Statut** : essai isolé réussi (2026-09-23) ; exécution réelle le
+  2026-09-23 : échec partiel — modification faite sans proposition préalable
+  du maître ; noyau bloc 3 clarifié ; re-test en session neuve à faire.
 
 ## SM-02 — Fresh eyes (critère d'acceptation n°1)
 

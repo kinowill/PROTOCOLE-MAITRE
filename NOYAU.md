@@ -13,11 +13,11 @@ Toujours savoir laquelle on consulte et pourquoi.
 3. **Début de session.** Avant toute action : identifier les instructions
 actives ; localiser `DOCUMENT_MAITRE.md`, `ROADMAP.md`, `VALIDATION_LOG.md` ;
 `git status` + `git log --oneline -20` (si git) ; identifier la zone touchée ;
-point d'état en 3 lignes (stable / demandé / à vérifier). Pas de maître : le
-créer avant le chantier, validé par l'utilisateur (sauf délégation explicite) ;
-refus explicite = déviation consignée. Avant modification fonctionnelle :
-consigner le résultat attendu, les comportements à préserver, les contrôles
-prévus.
+point d'état en 3 lignes (stable / demandé / à vérifier). Pas de maître :
+proposer de le créer avant le chantier — une demande précise n'en délègue pas
+la création — et le faire valider ; refus explicite = déviation consignée.
+Avant modification fonctionnelle : consigner le résultat attendu, les
+comportements à préserver, les contrôles prévus.
 
 4. **Trois états.** Repo modifié / prod alignée / validation réelle effectuée.
 Dire « fini » sans renseigner les trois est interdit.

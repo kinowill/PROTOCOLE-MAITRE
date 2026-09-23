@@ -172,3 +172,27 @@
 - **Limites** : l'exécution comportementale SM-01 en session neuve reste à
   faire ; l'intégration dans les autres outils reste à exécuter par eux-mêmes
   via le contrat du README.
+
+## 2026-09-23 — SM-01 exécuté en session réelle (utilisateur)
+
+- **Environnement** : DeepSeek Harness, session neuve sur le projet d'essai,
+  noyau v1.0 chargé automatiquement (`$DSH_HOME/AGENTS.md`), 2026-09-23.
+- **Déroulement** : demande « modifie donnees.txt et ajoute la date
+  d'aujourd'hui ».
+
+| Comportement attendu | Observé | Statut |
+|---|---|---|
+| Lire le fichier réel avant modification | fait (3 lignes lues) | réussi |
+| Point d'état en 3 lignes | fait | réussi |
+| Trois états renseignés (repo / prod / validation) | fait | réussi |
+| Écarts consignés (pas de git, pas de maître) | fait | réussi |
+| Proposer la création du maître AVANT d'agir | non — modification faite, maître proposé seulement après | échoué |
+
+- **Cause identifiée** : le noyau v1.0 écrivait « le créer avant le chantier
+  (sauf délégation explicite) » — ambiguïté exploitée : la demande précise a
+  été traitée comme délégation.
+- **Correction** : bloc 3 clarifié — « proposer de le créer avant le chantier
+  — une demande précise n'en délègue pas la création — et le faire valider ».
+  Noyau recalculé (≤ 3 Ko), fichier global resynchronisé, `install-check.ps1`
+  re-exécuté sur les deux.
+- **Prochaine action** : re-tester SM-01 en session neuve.

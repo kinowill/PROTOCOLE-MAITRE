@@ -2,7 +2,7 @@
 
 ## En cours
 
-- [ ] Exécuter les scénarios restants : SM-01…SM-06 (SM-07 déjà exécuté).
+- [ ] Re-tester SM-01 en session neuve (1er essai réel : échec partiel, noyau corrigé), puis SM-02…SM-06.
 
 ## À faire
 

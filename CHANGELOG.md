@@ -30,6 +30,11 @@ grep anti-règles dans les adaptateurs, présence des adaptateurs).
 `tools/pre-push-audit.ps1` (audit avant publication), scan de secrets dans
 la CI. Ajouté après l'incident « chemins personnels sur dépôt public ».
 
+**SM-01 réel** — exécuté par l'auteur en session neuve le 2026-09-23 : échec
+partiel (modification sans proposition préalable du maître) ; noyau bloc 3
+clarifié (« une demande précise n'en délègue pas la création ») ; re-test en
+attente.
+
 **Divergences assumées vs PROTOCOLE-CODEX v1.4** — sections 12-13
 généralisées ; « Outils et adaptateurs » remplace l'ancienne section 13 ;
 déviation consignée ajoutée ; `gh` dédupliqué. Alignement souple, documenté
