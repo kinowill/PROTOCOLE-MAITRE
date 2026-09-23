@@ -15,7 +15,7 @@ Outil en interface web, sessions liées à un espace de travail local.
 
 Méthode prévue : créer une skill `protocole-maitre` contenant l'intégralité
 de `NOYAU.md`, chargée à chaque session. La référence (`PROTOCOLE.md`) vit
-dans le dossier local du protocole (`C:\PROJETS\PROTOCOLE MAITRE`) et se lit
+dans le dossier local du protocole et se lit
 à la demande.
 
 Autres surfaces possibles (fichier d'instructions global du harnais) : non
@@ -37,5 +37,5 @@ documentées à ce jour, à vérifier avant de s'y appuyer.
 - Pas de fichier d'instructions global documenté : la skill est le vecteur
   principal à ce jour.
 - Le bac à sable restreint les écritures à l'espace de travail de session ;
-  les dossiers externes (ex. `C:\PROJETS`) exigent une approbation par
+  les dossiers externes (hors espace de travail) exigent une approbation par
   opération.

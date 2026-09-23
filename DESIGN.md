@@ -44,7 +44,7 @@ règles (elles sont bonnes) ; pas de portage Linux/macOS prioritaire.
 |---|---|---|---|
 | D1 | Nom : **PROTOCOLE MAITRE**, version agnostique | Garder PROTOCOLE-DEEPSEEK | Convergence des 3 protocoles en un noyau + adaptateurs |
 | D2 | **Repos existants intacts** | Les remplacer | Consigné par l'auteur : laisser tels quels |
-| D3 | Livraison : `C:\PROJETS\PROTOCOLE MAITRE` + `github.com/kinowill/PROTOCOLE-MAITRE` | — | Consigné par l'auteur |
+| D3 | Livraison : `C:\...\PROTOCOLE MAITRE` (dossier local) + `github.com/kinowill/PROTOCOLE-MAITRE` | — | Consigné par l'auteur |
 | D4 | Alignement Codex **souple** | Alignement strict | La convergence justifie les divergences ; documentées |
 | D5 | Budget : **noyau ≤ 3 Ko** + couches à la demande | 10-15 Ko unique | Un long prompt système dilue sa propre autorité |
 | D6 | Approche **C : couches + vérification** | A (pur doc), B (cœur unique) | Seule approche couvrant les 4 chantiers |
@@ -193,8 +193,8 @@ instantané, succès simulé interdit) mais ne peut pas la garantir absolument.
 
 ## 12. Rollout
 
-1. Créer `C:\PROJETS\PROTOCOLE MAITRE` (noyau, référence, adaptateurs,
-   templates, tools, CI).
+1. Créer `C:\...\PROTOCOLE MAITRE` (dossier local) : noyau, référence,
+   adaptateurs, templates, tools, CI.
 2. Extraction de la référence depuis v1.4 par déplacement de texte ;
    contrôles diff (à la Codex).
 3. Installations locales de test + `install-check.ps1`.

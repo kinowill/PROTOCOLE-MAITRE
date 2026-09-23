@@ -1,12 +1,12 @@
 ﻿# install-check.ps1 — Vérificateur d'installation du protocole MAITRE
 # Usage :
 #   .\install-check.ps1 -Target C:\Users\<toi>\.claude\CLAUDE.md
-#   .\install-check.ps1 -Target ~/.codex/AGENTS.md -Source "C:\PROJETS\PROTOCOLE MAITRE\NOYAU.md"
+#   .\install-check.ps1 -Target ~/.codex/AGENTS.md (source par défaut : NOYAU.md à côté du script)
 # Sortie : rapport texte + JSON dans <Target>.verification.json ; code 0 si conforme, 1 sinon.
 
 param(
   [Parameter(Mandatory=$true)][string]$Target,
-  [string]$Source = "C:\PROJETS\PROTOCOLE MAITRE\NOYAU.md"
+  [string]$Source = (Join-Path $PSScriptRoot '..\NOYAU.md')
 )
 $ErrorActionPreference = 'Stop'
 function Fail($msg) { Write-Host "[ERREUR] $msg"; exit 1 }
@@ -29,7 +29,8 @@ $count = ([regex]::Matches($tgtNorm, [regex]::Escape($srcNorm))).Count
 if ($count -gt 1) { Fail "Le bloc du noyau apparaît $count fois dans la cible (doublon)." }
 
 # 3. Version
-if ($tgt -notmatch 'PROTOCOLE MAITRE — Noyau v(\d+\.\d+)') { Fail "Ligne de version du noyau absente de la cible." }
+$versionRe = 'PROTOCOLE MAITRE ' + [char]0x2014 + ' Noyau v(\d+\.\d+)'
+if ($tgt -notmatch $versionRe) { Fail "Ligne de version du noyau absente de la cible." }
 $ver = $Matches[1]
 $srcVer = if ($src -match 'Noyau v(\d+\.\d+)') { $Matches[1] } else { '?' }
 if ($ver -ne $srcVer) { Fail "Version installée ($ver) différente de la source ($srcVer)." }

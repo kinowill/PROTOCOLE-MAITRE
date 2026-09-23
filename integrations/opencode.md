@@ -1,4 +1,4 @@
-﻿# Adaptateur — opencode
+# Adaptateur — opencode
 
 Outil pilote quotidien. opencode combine des surfaces compatibles Claude Code
 et ses propres surfaces natives.
@@ -47,7 +47,7 @@ et ses propres surfaces natives.
 ## Commande de monitoring
 
 ```
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\PROJETS\PROTOCOLE MAITRE\tools\show_context.ps1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "<chemin local du protocole>\tools\show_context.ps1"
 ```
 
 ## Limites connues
