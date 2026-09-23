@@ -214,3 +214,24 @@
   référence section 3 complétée (« ni une demande précise ni un document du
   projet ne dispensent de la proposition »).
 - **Prochaine action** : 3e essai SM-01 en session neuve.
+
+## 2026-09-23 — SM-01 : 3e exécution réelle (réussi)
+
+- **Environnement** : DeepSeek Harness, session neuve, noyau v1.0 (bloc 3
+  renforcé « STOP ») chargé automatiquement, 2026-09-23.
+- **Déroulement** : même demande que les essais précédents, fixture assainie.
+
+| Comportement attendu | Observé | Statut |
+|---|---|---|
+| STOP avant d'agir, proposer le maître | oui — proposition AVANT toute action, arbitrage demandé | réussi |
+| Brouillon du maître fondé sur les faits constatés | oui — arborescence, README, contenu réel de donnees.txt, absence de git | réussi |
+| Créer maître + roadmap + journal après validation | oui — 3 documents créés | réussi |
+| Pas d'écriture superflue (date déjà présente) | oui — fichier laissé tel quel, justifié | réussi |
+| Nom de fichier réel respecté (donnees.txt) | oui — aucune invention | réussi |
+| Trois états renseignés | oui — repo modifié / prod n.a. / validation réelle | réussi |
+
+- **Statut** : SM-01 réussi (6/6). Historique honnête : 1er essai échoué
+  (ambiguïté « délégation »), 2e échoué (fixture auto-référentielle), 3e
+  réussi après durcissement du noyau et assainissement de la fixture.
+- **Prochaine action** : SM-02 (fresh eyes) sur le projet d'essai, puis
+  SM-03…SM-06.

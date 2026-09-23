@@ -30,11 +30,10 @@ grep anti-règles dans les adaptateurs, présence des adaptateurs).
 `tools/pre-push-audit.ps1` (audit avant publication), scan de secrets dans
 la CI. Ajouté après l'incident « chemins personnels sur dépôt public ».
 
-**SM-01 réel** — 1re exécution (2026-09-23) : échec partiel, bloc 3 clarifié.
-2e exécution : échec du même critère pour une cause distincte (README du
-dossier d'essai utilisé comme dispense) — fixture assainie, bloc 3 renforcé
-(« STOP — proposer et attendre la validation »), référence §3 complétée.
-3e essai en attente.
+**SM-01 réel** — 3 exécutions réelles (2026-09-23) : 1re échec (ambiguïté
+« délégation »), 2e échec (fixture auto-référentielle), 3e **réussi 6/6**
+après durcissement du noyau (bloc 3 « STOP — proposer et attendre la
+validation ») et assainissement de la fixture.
 
 **Divergences assumées vs PROTOCOLE-CODEX v1.4** — sections 12-13
 généralisées ; « Outils et adaptateurs » remplace l'ancienne section 13 ;

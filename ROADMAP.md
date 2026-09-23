@@ -2,7 +2,7 @@
 
 ## En cours
 
-- [ ] Re-tester SM-01 en session neuve (1er essai réel : échec partiel, noyau corrigé), puis SM-02…SM-06.
+- [ ] Exécuter SM-02 (fresh eyes) puis SM-03…SM-06.
 
 ## À faire
 
@@ -17,6 +17,7 @@
 - [x] Skill `protocole-maitre` créée et active dans DeepSeek Harness.
 - [x] Sécurité : noyau bloc 9 enrichi, référence §8, pre-push-audit.ps1, scan CI.
 - [x] SM-07 exécuté : 4/4 cas conformes.
+- [x] SM-01 réel : réussi (3e essai, 6/6).
 - [x] Auto-chargement global activé dans DeepSeek Harness (`$DSH_HOME/AGENTS.md`, mécanisme natif vérifié).
 - [x] Contrat d'intégration déléguée documenté (README) : tout agent peut intégrer sans aide.
 
