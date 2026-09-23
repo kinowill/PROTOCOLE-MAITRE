@@ -105,6 +105,9 @@ donc non seulement une discipline de travail, mais aussi une optimisation
      Dans ce cas, rédiger et vérifier directement les faits établis, noter les
      inconnues et ne demander un arbitrage que pour une décision structurante.
      Ne jamais inventer un état de production ni une validation passée.
+     Ni une demande précise ni un document du projet ne dispensent de cette
+     proposition : seul un refus explicite de l'utilisateur constitue une
+     déviation, qui doit être consignée.
 3. **Identifier la roadmap ou le backlog.**
    - Si elle n'existe pas : en créer une version minimale (objectif courant,
      2-3 prochaines tâches, ce qui est bloqué). Même brève, elle doit exister.
