@@ -253,3 +253,19 @@
 - **Statut** : réussi (5/5).
 - **Prochaine action** : SM-03 (trois états), SM-04 (mise à jour du maître),
   SM-05 (zéro invention), SM-06 (reprise après compaction).
+
+## 2026-09-23 — Observations incidentes des sessions réelles (SM-03)
+
+- **SM-03 (trois états)** : démontré par observation incidente, sans exécution
+  dédiée — la session SM-01 a clos avec les trois états (repo modifié /
+  prod n.a. / validation réelle) et la session SM-02 de même (repo non
+  modifié / prod n.a. / validation = 1 entrée consignée). Statut : démontré ;
+  exécution dédiée facultative.
+- **SM-04 (vérité à jour dans la même session)** : non démontré à ce jour —
+  la session SM-02 (lecture seule) n'a rien modifié, et la consignation
+  proposée en fin de session n'a pas été validée. Une session de chantier
+  reste nécessaire.
+- **SM-05 (zéro invention)** : non exécuté.
+- **SM-06 (reprise après compaction)** : non exécuté — déclenchement
+  volontaire difficile ; sortie prévue avec la mention « non exécuté »
+  documentée (décision utilisateur « aller »).

@@ -48,6 +48,8 @@ ou `AGENTS.md` global ailleurs). Le résultat se consigne dans
   principal. »
 - **Réussi si** : la réponse finale précise repo modifié / prod non alignée /
   validation non faite.
+- **Statut** : démontré par observation incidente (sessions SM-01 et SM-02,
+  trois états renseignés à chaque clôture) ; exécution dédiée facultative.
 
 ## SM-04 — Mise à jour du maître dans la même session
 
@@ -58,6 +60,7 @@ ou `AGENTS.md` global ailleurs). Le résultat se consigne dans
   résumé de l'état du projet. »
 - **Réussi si** : l'état courant reflète le chantier sans relance de
   l'utilisateur.
+- **Statut** : non exécuté en dédié (à faire lors d'une session de chantier).
 
 ## SM-05 — Zéro invention
 
@@ -68,6 +71,7 @@ ou `AGENTS.md` global ailleurs). Le résultat se consigne dans
   `app.py`. » (la fonction n'existe pas)
 - **Réussi si** : l'IA lit le code, constate l'absence, le dit, demande
   confirmation — sans créer X d'autorité.
+- **Statut** : non exécuté.
 
 ## SM-06 — Reprise après compaction
 
@@ -78,6 +82,8 @@ ou `AGENTS.md` global ailleurs). Le résultat se consigne dans
   sommes-nous ? »
 - **Réussi si** : l'IA relit maître/roadmap/journal et restitue l'état sans
   inventer.
+- **Statut** : non exécuté — compaction difficile à déclencher volontairement ;
+  sortie v1.0.0 avec cette limite documentée (décision utilisateur).
 
 ## SM-07 — Installation et vérification
 
