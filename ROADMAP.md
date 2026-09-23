@@ -1,26 +1,13 @@
-# Roadmap — PROTOCOLE MAITRE (backlog du protocole lui-même)
+# Roadmap — PROTOCOLE MAITRE
 
-## En cours
+## Prochaines versions
 
-- [ ] Exécuter SM-03…SM-06 (SM-01 et SM-02 réussis).
-
-## À faire
-
-- [ ] Décider : pointeurs dans les README des 3 anciens repos.
+- [ ] Élargir les adaptateurs (Cursor, Windsurf, Aider…).
+- [ ] Portage Linux/macOS de `show_context.ps1`.
 
 ## Fait
 
-- [x] Design validé (DESIGN.md, décisions D1-D13).
-- [x] NOYAU.md (3 004 octets) + PROTOCOLE.md (référence) + 5 adaptateurs.
-- [x] Templates projet + install-check.ps1 + CI.
-- [x] Publication GitHub : repo public, push `main`, tag `v1.0.0-candidate` (release stable après scénarios).
-- [x] Skill `protocole-maitre` créée et active dans DeepSeek Harness.
-- [x] Sécurité : noyau bloc 9 enrichi, référence §8, pre-push-audit.ps1, scan CI.
-- [x] SM-07 exécuté : 4/4 cas conformes.
-- [x] SM-01 réel : réussi (3e essai, 6/6).
-- [x] SM-02 fresh eyes : réussi (5/5).
-- [x] Auto-chargement global activé dans DeepSeek Harness (`$DSH_HOME/AGENTS.md`, mécanisme natif vérifié).
-- [x] Contrat d'intégration déléguée documenté (README) : tout agent peut intégrer sans aide.
+- [x] v1.0.0-candidate : noyau, référence, 5 adaptateurs, templates, outils, CI.
 
 ## Bloqué
 

@@ -1,8 +1,7 @@
 # Adaptateur — opencode
 
-Outil historique — l'auteur n'utilise plus opencode au quotidien (pilote
-actuel : DeepSeek Harness). L'adaptateur est maintenu pour compatibilité.
-opencode combine des surfaces compatibles Claude Code
+Outil maintenu pour compatibilité. opencode combine des surfaces compatibles
+Claude Code
 et ses propres surfaces natives.
 
 ## Surfaces d'injection

@@ -22,7 +22,7 @@ projet. Ce protocole transforme ce risque en processus contrôlable.
 | `tools/install-check.ps1` | Vérificateur d'installation : intégrité, doublons, version, taille. |
 | `tools/pre-push-audit.ps1` | Audit de publication : détecte secrets et motifs sensibles avant push. |
 | `templates/` | Squelettes pour les projets gouvernés. |
-| `VALIDATION_SCENARIOS.md` | Scénarios comportementaux (SM-01…SM-07) à exécuter. |
+| `VALIDATION_SCENARIOS.md` | Méthode de validation comportementale (SM-01…SM-07). |
 | `VALIDATION_LOG.md` | Ce qui a été réellement vérifié, et les limites. |
 
 ## Démarrage rapide (délégué à l'IA)
@@ -92,10 +92,9 @@ les décisions et pourquoi, les blocages. C'est le critère « fresh eyes »
 
 ## État du dépôt
 
-Candidate v1.0. Validation documentaire consignée dans `VALIDATION_LOG.md` ;
-SM-07 exécuté (4/4), SM-01 testé en essai isolé (réussi), fresh eyes
-documentaire effectué sur le dépôt lui-même. Aucune release stable tant que
-SM-01…SM-06 ne sont pas exécutés en session réelle.
+Version candidate v1.0. Chaque intégration est vérifiée par l'intégrateur
+selon la méthode `VALIDATION_SCENARIOS.md` (SM-01…SM-07) et le contrat
+d'intégration ci-dessus.
 
 ## Licence
 
