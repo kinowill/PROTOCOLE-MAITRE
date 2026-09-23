@@ -6,8 +6,6 @@
 
 ## À faire
 
-- [ ] Généraliser l'usage de la skill `protocole-maitre` dans les sessions
-  DeepSeek Harness (chargement à chaque session).
 - [ ] Décider : pointeurs dans les README des 3 anciens repos.
 
 ## Fait
@@ -19,6 +17,8 @@
 - [x] Skill `protocole-maitre` créée et active dans DeepSeek Harness.
 - [x] Sécurité : noyau bloc 9 enrichi, référence §8, pre-push-audit.ps1, scan CI.
 - [x] SM-07 exécuté : 4/4 cas conformes.
+- [x] Auto-chargement global activé dans DeepSeek Harness (`$DSH_HOME/AGENTS.md`, mécanisme natif vérifié).
+- [x] Contrat d'intégration déléguée documenté (README) : tout agent peut intégrer sans aide.
 
 ## Bloqué
 

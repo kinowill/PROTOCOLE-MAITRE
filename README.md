@@ -30,12 +30,40 @@ projet. Ce protocole transforme ce risque en processus contrôlable.
 Dans une session de ton outil, envoie :
 
 > Regarde https://github.com/kinowill/PROTOCOLE-MAITRE et intègre ce protocole
-> dans mon projet. Préserve mes consignes existantes, crée la documentation
-> factuelle manquante et vérifie l'installation.
+> dans mon outil et mes projets. Préserve mes consignes existantes, crée la
+> documentation factuelle manquante et vérifie l'installation.
 
 Précise « installe-le globalement » ou « installe-le globalement et complète
-les consignes de ce projet » (hybride recommandé). L'IA lit le dépôt, intègre,
-vérifie et rend un bilan — sans copier-coller demandé à l'utilisateur.
+les consignes de ce projet » (hybride recommandé). L'utilisateur n'a rien à
+copier ni remplir.
+
+### Contrat d'intégration déléguée (pour l'IA qui intègre)
+
+1. Lire `NOYAU.md` (la loi) et `PROTOCOLE.md` (la référence) depuis une même
+   révision identifiée, puis l'adaptateur de l'outil actif
+   (`integrations/<outil>.md` — sinon `integrations/generic.md`).
+2. Identifier l'outil cible, ses surfaces d'injection (fichier global
+   d'instructions, config, skill) et ses consignes existantes — les préserver.
+3. Intégrer l'**intégralité** de `NOYAU.md` dans la surface globale de l'outil.
+   Par projet, ajouter la fiche projet (`templates/FICHE_PROJET.md` remplie).
+   Jamais de version courte du noyau.
+4. Sauvegarder les fichiers modifiés avant de les toucher ; une réinstallation
+   ne crée aucun doublon.
+5. Créer les documents factuels manquants du projet (maître, roadmap) avec les
+   faits vérifiés — sans rien inventer.
+6. Vérifier : `tools/install-check.ps1 -Target <fichier injecté>` (intégrité,
+   doublons, version, taille), puis le test SM-01 (nouvelle session, projet
+   sans maître → proposition de création du maître avant d'agir).
+7. Rendre un bilan : version source, cible, sauvegardes, changements, contrôles
+   passés, chargement observé, limites. Si le chargement en nouvelle session
+   n'a pas pu être observé, le dire : « installation vérifiée, chargement en
+   nouvelle session non vérifié ».
+
+### Validation de l'installation
+
+La présence d'un fichier d'instructions ne prouve pas le chargement : seul le
+test SM-01 le prouve (voir `VALIDATION_SCENARIOS.md`). `install-check.ps1`
+vérifie la conformité statique (intégrité SHA-256, doublons, version, taille).
 
 ## Installation manuelle
 

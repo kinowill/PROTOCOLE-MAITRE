@@ -149,3 +149,26 @@
   les push post-réécriture (sécurité, cohérence, outil pilote).
 - **Limites** : SM-01 en session réelle, SM-02 sur un projet utilisateur et
   SM-03…SM-06 restent non exécutés.
+
+## 2026-09-23 — Auto-chargement DSH natif + contrat d'intégration déléguée
+
+- **Demande explicite** : le protocole doit se charger automatiquement dans
+  DeepSeek Harness, et le dépôt doit permettre à tout agent (Codex, Claude
+  Code, autre) d'intégrer le protocole seul, sans aide.
+- **Découverte vérifiée dans le harnais** : paquet natif
+  `@deepseek-ai/dsh-agent-instructions` — injecte au premier message de chaque
+  session le fichier global `$DSH_HOME/AGENTS.md` (budget 65 536 octets par
+  défaut), puis la chaîne projet `AGENTS.md`/`CLAUDE.md` (+ surcouches
+  `.local.md`). Le mécanisme natif rend un plugin inutile.
+- **Actions** : `$DSH_HOME/AGENTS.md` écrit avec l'intégralité de `NOYAU.md` ;
+  skill `protocole-maitre` convertie en pointeur vers la référence ;
+  adaptateur `harness-dsh.md` réécrit avec les surfaces vérifiées ; README
+  enrichi d'un contrat d'intégration déléguée en 7 étapes + validation.
+- **Contrôles** : `install-check.ps1` sur le fichier global → conforme
+  (intégrité, 1 occurrence, version v1.0).
+- **Chargement observé** : après l'écriture du fichier global, le harnais l'a
+  injecté dans la session courante (instructions de session visibles dans le
+  prompt système) — l'auto-chargement est vérifié en conditions réelles.
+- **Limites** : l'exécution comportementale SM-01 en session neuve reste à
+  faire ; l'intégration dans les autres outils reste à exécuter par eux-mêmes
+  via le contrat du README.
