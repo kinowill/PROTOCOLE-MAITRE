@@ -1,4 +1,4 @@
-﻿# PROTOCOLE MAITRE
+# PROTOCOLE MAITRE
 
 > Protocole de travail IA, agnostique, pour qu'un utilisateur reste maître
 > de ses projets quand une IA code à sa place.
@@ -12,7 +12,7 @@ principal n'est pas le mauvais code : c'est que l'IA avance sans laisser de
 trace lisible, jusqu'au moment où plus personne ne sait dans quel état est le
 projet. Ce protocole transforme ce risque en processus contrôlable.
 
-## Deux niveaux de lecture
+## Les fichiers du dépôt
 
 | Fichier | Rôle |
 |---|---|
@@ -20,6 +20,7 @@ projet. Ce protocole transforme ce risque en processus contrôlable.
 | `PROTOCOLE.md` | La référence complète : elle explique et détaille le noyau. Lue à la demande. |
 | `integrations/<outil>.md` | L'adaptateur de chaque outil : surfaces d'injection, fonctionnalités, valeurs propres. Aucune règle normative. |
 | `tools/install-check.ps1` | Vérificateur d'installation : intégrité, doublons, version, taille. |
+| `tools/pre-push-audit.ps1` | Audit de publication : détecte secrets et motifs sensibles avant push. |
 | `templates/` | Squelettes pour les projets gouvernés. |
 | `VALIDATION_SCENARIOS.md` | Scénarios comportementaux (SM-01…SM-07) à exécuter. |
 | `VALIDATION_LOG.md` | Ce qui a été réellement vérifié, et les limites. |

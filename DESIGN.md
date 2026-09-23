@@ -54,6 +54,7 @@ règles (elles sont bonnes) ; pas de portage Linux/macOS prioritaire.
 | D10 | **Adaptateurs sans règles normatives** (grep CI) | Adaptateurs libres | Empêche la re-dérive des protocoles par outil |
 | D11 | Refus explicite du maître = **déviation consignée** | Forcer la création | L'utilisateur est souverain ; la déviation doit être visible |
 | D12 | Chaque validation consigne **l'environnement exact** (outil, modèle, version, date) | — | Deux exécutions doivent être comparables |
+| D13 | **Sécurité intégrée** : bloc 9 du noyau, §8 de la référence, pre-push-audit.ps1, scan CI | Règles éparses existantes | Incident chemins perso : la sécurité doit être une règle dure |
 
 ## 4. Architecture : 3 couches + couche machine
 

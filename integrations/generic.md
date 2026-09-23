@@ -1,4 +1,4 @@
-﻿# Adaptateur — Outils génériques
+# Adaptateur — Outils génériques
 
 S'applique à tout assistant acceptant un prompt système ou un fichier
 d'instructions persistant : Cursor, Cline, Continue, Aider, ChatGPT custom
@@ -29,7 +29,7 @@ dépôt GitHub), pas injectée en permanence.
 
 Selon l'outil : traduire (la langue n'est pas une règle), ajouter des
 spécificités de projet. En cas de fenêtre limitée, tout raccourcissement
-reste soumis à la règle du noyau (bloc 9) et à la référence (section 11) :
+reste soumis à la règle du noyau (bloc 9) et à la référence (section 12) :
 pas de version courte substituée au noyau sans demande explicite de
 l'utilisateur.
 

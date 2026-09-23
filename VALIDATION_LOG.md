@@ -65,3 +65,43 @@
 - **Statut** : réussi (audit re-exécuté après modifications : aucun motif).
 - **Limites** : `main` et le tag `v1.0.0-candidate` re-poussés après
   réécriture ; CI à re-vérifier sur les nouveaux commits.
+
+## 2026-09-23 — Sécurité : règles ajoutées au protocole
+
+- **Demande explicite** : intégrer les règles de sécurité manquantes (aucun
+  secret, chemin personnel ou donnée sensible dans un dépôt public ; audit
+  avant publication).
+- **Contrôles exécutés** :
+
+| Contrôle | Attendu | Observé | Statut |
+|---|---|---|---|
+| Noyau après ajout (bloc 9) | ≤ 3 072 octets | 3 004 octets | réussi |
+| Référence | section dédiée | §8 « Sécurité et secrets », 15 sections | réussi |
+| `pre-push-audit.ps1` | détecte les motifs, exit 1 si trouvés | auto-test : faux positif sur ci.yml identifié, corrigé (exclusion des fichiers de vocabulaire), re-test sans motif, exit 0 | réussi |
+| Scan de secrets CI | étape ajoutée | « Scan de secrets » dans ci.yml | réussi |
+| Skill `protocole-maitre` | alignée sur le noyau | bloc 9 enrichi identique | réussi |
+
+- **Limites** : l'audit local exclut les deux fichiers de vocabulaire
+  (pre-push-audit.ps1, ci.yml) ; la CI distante, elle, les couvre.
+- **Prochaine action** : publication des changements (commit + push + CI).
+
+## 2026-09-23 — SM-07 : installation et vérification (exécuté)
+
+- **Environnement** : Windows PowerShell 5.1, `install-check.ps1` à HEAD,
+  noyau v1.0, 2026-09-23.
+- **État testé** : dépôt local, `NOYAU.md` comme cible de référence.
+
+| Cas | Attendu | Observé | Statut |
+|---|---|---|---|
+| a. Cible conforme | exit 0 | exit 0, rapport JSON | réussi |
+| b. Cible tronquée | exit 1 | exit 1 « absent ou tronqué » | réussi |
+| c. Doublon | exit 1 | exit 1 « doublon » | réussi |
+| d. Source > 3 Ko | exit 1 | exit 1 « règle ≤ 3 Ko violée » | réussi |
+
+- **Défaut trouvé et corrigé** : premier passage du cas a échoué —
+  `$PSScriptRoot` est vide dans la valeur par défaut d'un paramètre quand le
+  script est lancé via `powershell.exe -File`. Correction : la source par
+  défaut est calculée dans le corps du script. Les quatre cas ont été
+  re-exécutés après correction.
+- **Limites** : SM-01…SM-06 toujours non exécutés (nécessitent des sessions
+  réelles).

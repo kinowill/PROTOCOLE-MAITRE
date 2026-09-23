@@ -2,11 +2,10 @@
 
 ## En cours
 
-- [ ] Exécuter les scénarios comportementaux (SM-01 d'abord : chargement du noyau).
+- [ ] Exécuter les scénarios restants : SM-01…SM-06 (SM-07 déjà exécuté).
 
 ## À faire
 
-- [ ] Créer la skill `protocole-maitre` pour DeepSeek Harness.
 - [ ] Installer le noyau globalement (opencode + DeepSeek Harness).
 - [ ] Décider : pointeurs dans les README des 3 anciens repos.
 
@@ -16,6 +15,9 @@
 - [x] NOYAU.md (2 904 octets) + PROTOCOLE.md (référence) + 5 adaptateurs.
 - [x] Templates projet + install-check.ps1 + CI.
 - [x] Publication GitHub : repo public, push `main`, tag `v1.0.0-candidate` (release stable après scénarios).
+- [x] Skill `protocole-maitre` créée et active dans DeepSeek Harness.
+- [x] Sécurité : noyau bloc 9 enrichi, référence §8, pre-push-audit.ps1, scan CI.
+- [x] SM-07 exécuté : 4/4 cas conformes.
 
 ## Bloqué
 

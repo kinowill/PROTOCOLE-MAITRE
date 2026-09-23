@@ -1,4 +1,4 @@
-﻿name: CI
+name: CI
 
 on: [push, pull_request]
 
@@ -18,7 +18,7 @@ jobs:
         run: |
           count=$(grep -c '^## ' PROTOCOLE.md)
           echo "$count sections de niveau 2"
-          if [ "$count" -lt 14 ]; then echo "ERREUR : sections manquantes"; exit 1; fi
+          if [ "$count" -lt 15 ]; then echo "ERREUR : sections manquantes"; exit 1; fi
 
       - name: Aucune règle normative dans les adaptateurs
         run: |
@@ -26,6 +26,13 @@ jobs:
             echo "ERREUR : règle normative trouvée dans un adaptateur"; exit 1
           fi
           echo "Aucune règle normative détectée."
+
+      - name: Scan de secrets (hors fichiers de vocabulaire)
+        run: |
+          if git grep -n -I -E 'gho_[A-Za-z0-9]|ghp_[A-Za-z0-9]|sk-[A-Za-z0-9]{10}|BEGIN [A-Z ]*PRIVATE KEY|AKIA[0-9A-Z]{16}' -- . ':!PROTOCOLE.md' ':!tools/pre-push-audit.ps1'; then
+            echo "ERREUR : motif de secret trouvé"; exit 1
+          fi
+          echo "Aucun motif de secret détecté."
 
       - name: Adaptateurs présents
         run: |

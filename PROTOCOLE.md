@@ -265,7 +265,29 @@ Règles d'usage :
 - pour l'automatisation, préférer les variables d'environnement (`GH_TOKEN`,
   `GITHUB_TOKEN`) à un token collé dans une commande.
 
-## 8. Décisions
+## 8. Sécurité et secrets
+
+- **Rien de personnel ni de secret dans un dépôt, une documentation, un commit
+  ou une sortie publique** : clés, tokens, mots de passe, emails personnels,
+  chemins locaux identifiants (répertoire utilisateur, dossiers projets).
+- **Fichiers sensibles jamais versionnés** : `.env`, identifiants, sauvegardes
+  de configuration. `.gitignore` avant le premier commit. Un fichier ajouté
+  puis supprimé reste dans l'historique : le retirer du dépôt ne suffit pas.
+- **Auditer avant chaque publication** (commit, push, release, partage de
+  session) : relire le diff et lancer `tools/pre-push-audit.ps1` (secrets par
+  défaut, chemins personnels en motifs additionnels).
+- **Secrets en usage** : variables d'environnement (`GH_TOKEN`,
+  `GITHUB_TOKEN`), jamais collés dans une commande partagée, un script
+  versionné ou la documentation.
+- **Fuite avérée** : agir immédiatement — révoquer/invalider les secrets
+  exposés (un token publié est considéré compromis), retirer le contenu,
+  réécrire l'historique si nécessaire avant de re-publier.
+- **Zones sensibles** (auth, données utilisateurs, schéma, sécurité, RGPD) :
+  vérifier la cohérence avec l'état réel avant modification (rappel section 9).
+- Les contrôles d'intégrité (section 12) s'appliquent : ne jamais retirer un
+  contrôle de sécurité pour obtenir un résultat vert.
+
+## 9. Décisions
 
 - **Ne jamais avancer seul** sur une décision produit, méthodologique
   ou architecturale lourde.
@@ -282,7 +304,7 @@ Règles d'usage :
   (refus noté, travail effectué sans, nouvelle proposition au chantier
   suivant). Elle n'est jamais silencieuse.
 
-## 9. Posture face aux erreurs et obstacles
+## 10. Posture face aux erreurs et obstacles
 
 - Si un appel échoue ou si quelque chose ne marche pas comme prévu,
   **diagnostiquer avant de re-tenter**. Pas de retry aveugle.
@@ -313,7 +335,7 @@ produire un diagnostic : observations, hypothèses testées, causes écartées,
 élément manquant et prochaine action. Continuer les travaux indépendants encore
 possibles. Ne pas masquer un blocage ni déclarer un succès faute de pouvoir tester.
 
-## 10. Posture face aux propositions externes
+## 11. Posture face aux propositions externes
 
 - Quand l'utilisateur transmet un audit, un conseil ou une recommandation
   venue d'ailleurs : **lire avec esprit critique**, pas en exécution aveugle.
@@ -323,7 +345,7 @@ possibles. Ne pas masquer un blocage ni déclarer un succès faute de pouvoir te
   et ce qui contredit des choix structurants déjà pris.
 - Restituer une lecture honnête, même si elle invalide la recommandation.
 
-## 11. Ce qui est interdit
+## 12. Ce qui est interdit
 
 - Avancer sans avoir lu les sources de vérité.
 - Inventer un fichier, une fonction, un nom de variable.
@@ -350,7 +372,7 @@ possibles. Ne pas masquer un blocage ni déclarer un succès faute de pouvoir te
 - Ne pas présenter une relecture de texte, une auto-évaluation ou un scénario
   préparé comme un essai comportemental réellement exécuté.
 
-## 12. Contexte, compaction et continuité
+## 13. Contexte, compaction et continuité
 
 Une session d'IA a une fenêtre de contexte finie (valeurs par outil dans les
 adaptateurs). Quand elle approche la limite, l'outil compresse automatiquement
@@ -405,7 +427,7 @@ adaptée à chaque outil est dans `integrations/<outil>.md`.
 - Le script ne dit rien des quotas d'usage du plan (resets horaires) :
   ça reste à la charge de l'utilisateur.
 
-## 13. Outils et adaptateurs
+## 14. Outils et adaptateurs
 
 Le protocole est agnostique. Tout ce qui dépend d'un outil précis vit dans un
 adaptateur :
@@ -430,7 +452,7 @@ règle, c'est que la règle doit être généralisée ici.
 Règle de lecture : lire l'adaptateur de l'outil actif au début de session,
 à côté du noyau ; les autres uniquement si l'outil change.
 
-## 14. Pourquoi ce protocole tient
+## 15. Pourquoi ce protocole tient
 
 Il tient parce qu'il repose sur deux mécanismes complémentaires :
 

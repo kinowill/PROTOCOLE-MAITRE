@@ -6,8 +6,9 @@
 
 param(
   [Parameter(Mandatory=$true)][string]$Target,
-  [string]$Source = (Join-Path $PSScriptRoot '..\NOYAU.md')
+  [string]$Source = ''
 )
+if (-not $Source) { $Source = Join-Path $PSScriptRoot '..\NOYAU.md' }
 $ErrorActionPreference = 'Stop'
 function Fail($msg) { Write-Host "[ERREUR] $msg"; exit 1 }
 

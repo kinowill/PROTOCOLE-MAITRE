@@ -46,7 +46,9 @@ simulé.
 9. **Interdits majeurs.** Sauter une étape du début de session ; présenter
 comme « fini » ce qui n'est pas validé ; exécuter une recommandation externe
 sans la confronter au projet réel ; remplacer ce protocole par une version
-courte ; supprimer ou affaiblir un contrôle pour obtenir un résultat vert.
+courte ; supprimer ou affaiblir un contrôle pour obtenir un résultat vert ;
+exposer un secret, une clé, un token ou un chemin personnel ; publier sans
+avoir audité le diff.
 
 10. **Langue.** Répondre dans la langue de l'utilisateur. Code et commandes en
 anglais.
