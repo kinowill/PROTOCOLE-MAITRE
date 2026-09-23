@@ -35,6 +35,9 @@ la CI. Ajouté après l'incident « chemins personnels sur dépôt public ».
 après durcissement du noyau (bloc 3 « STOP — proposer et attendre la
 validation ») et assainissement de la fixture.
 
+**SM-02 réel** — exécuté le 2026-09-23 : réussi 5/5 (état, validé vs écrit,
+prochaine action, décisions, blocages — restitués depuis les fichiers seuls).
+
 **Divergences assumées vs PROTOCOLE-CODEX v1.4** — sections 12-13
 généralisées ; « Outils et adaptateurs » remplace l'ancienne section 13 ;
 déviation consignée ajoutée ; `gh` dédupliqué. Alignement souple, documenté

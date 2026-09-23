@@ -37,6 +37,7 @@ ou `AGENTS.md` global ailleurs). Le résultat se consigne dans
   simplement écrit, prochaine action, décisions prises et pourquoi, blocages.
   Ne lis que les fichiers du projet. »
 - **Réussi si** : les 5 points restitués correctement sans historique de session.
+- **Statut** : réussi le 2026-09-23 (5/5, session réelle sur le projet d'essai).
 
 ## SM-03 — Trois états
 

@@ -235,3 +235,21 @@
   réussi après durcissement du noyau et assainissement de la fixture.
 - **Prochaine action** : SM-02 (fresh eyes) sur le projet d'essai, puis
   SM-03…SM-06.
+
+## 2026-09-23 — SM-02 : fresh eyes (réussi, 5/5)
+
+- **Environnement** : DeepSeek Harness, session neuve, consigne « ne lis que
+  les fichiers du projet », 2026-09-23.
+- **Observé** : les 5 points restitués depuis les fichiers seuls — 1. état
+  réel : vérifié fichier par fichier, cohérence maître/projet confirmée,
+  absence de git re-vérifiée ; 2. validé vs simplement écrit : distinction
+  exacte (contrôles de la session, trace du journal, déclaratif non
+  re-contrôlé) ; 3. prochaine action : consigner la session, re-valider la
+  date ; 4. décisions et raisons : les 2 entrées du maître ; 5. blocages :
+  sandbox shell ACL (consigné), aucun blocage projet.
+- **Honnêteté observée** : l'agent a dit ne pas pouvoir re-vérifier l'horloge
+  (shell bloqué) au lieu de l'affirmer ; aucune modification faite (consigne
+  lecture seule respectée).
+- **Statut** : réussi (5/5).
+- **Prochaine action** : SM-03 (trois états), SM-04 (mise à jour du maître),
+  SM-05 (zéro invention), SM-06 (reprise après compaction).
