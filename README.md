@@ -65,8 +65,9 @@ les décisions et pourquoi, les blocages. C'est le critère « fresh eyes »
 ## État du dépôt
 
 Candidate v1.0. Validation documentaire consignée dans `VALIDATION_LOG.md` ;
-scénarios comportementaux préparés, exécution à venir. Aucune release stable
-tant que SM-01…SM-07 ne sont pas exécutés.
+SM-07 exécuté (4/4), SM-01 testé en essai isolé (réussi), fresh eyes
+documentaire effectué sur le dépôt lui-même. Aucune release stable tant que
+SM-01…SM-06 ne sont pas exécutés en session réelle.
 
 ## Licence
 

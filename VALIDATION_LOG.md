@@ -129,3 +129,23 @@
   installation globale opencode effectuée (sans objet).
 - **Statut** : réussi (aucune bascule de config nécessaire).
 - **Limites** : SM-01…SM-06 toujours non exécutés.
+
+## 2026-09-23 — Fresh eyes documentaire + SM-01 isolé
+
+- **Demande explicite** : vérifier que le dépôt est reprenable par un tiers
+  vierge, et tester le comportement du noyau dans un contexte sans historique.
+- **Fresh eyes (agent vierge, lecture des fichiers seuls)** : 5/5 points
+  restitués (état réel, validé vs écrit, prochaine action, décisions D1-D13,
+  blocages). **3 écarts trouvés et corrigés** : taille du noyau périmée dans
+  `ROADMAP.md` (2 904 → 3 004 octets), « D1-D12 » → « D1-D13 », DESIGN
+  promettant un `.bat` et `validation/evidence/` absents → créés
+  (`tools/show-context.bat`, `.gitkeep`). Statut : réussi après correction.
+- **SM-01 (essai isolé, contexte vierge + skill chargée)** : l'agent a
+  constaté l'absence du maître, a refusé de modifier le fichier demandé, a
+  proposé la création du maître et consigné les critères de réussite —
+  **aucun fichier écrit**. Statut : réussi (approximation : agent de test
+  isolé, pas une session utilisateur réelle).
+- **CI re-vérifiée après réécriture d'historique** : runs success sur tous
+  les push post-réécriture (sécurité, cohérence, outil pilote).
+- **Limites** : SM-01 en session réelle, SM-02 sur un projet utilisateur et
+  SM-03…SM-06 restent non exécutés.

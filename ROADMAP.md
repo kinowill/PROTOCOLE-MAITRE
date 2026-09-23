@@ -12,8 +12,8 @@
 
 ## Fait
 
-- [x] Design validé (DESIGN.md, décisions D1-D12).
-- [x] NOYAU.md (2 904 octets) + PROTOCOLE.md (référence) + 5 adaptateurs.
+- [x] Design validé (DESIGN.md, décisions D1-D13).
+- [x] NOYAU.md (3 004 octets) + PROTOCOLE.md (référence) + 5 adaptateurs.
 - [x] Templates projet + install-check.ps1 + CI.
 - [x] Publication GitHub : repo public, push `main`, tag `v1.0.0-candidate` (release stable après scénarios).
 - [x] Skill `protocole-maitre` créée et active dans DeepSeek Harness.
