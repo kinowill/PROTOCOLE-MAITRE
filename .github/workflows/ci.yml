@@ -2,41 +2,36 @@ name: CI
 
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   checks:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: pwsh
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Garde-fou noyau ≤ 3 Ko
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Versions des outils
         run: |
-          size=$(wc -c < NOYAU.md)
-          echo "NOYAU.md = $size octets"
-          if [ "$size" -gt 3072 ]; then echo "ERREUR : noyau > 3 Ko"; exit 1; fi
-
-      - name: Sections de la référence
-        run: |
-          count=$(grep -c '^## ' PROTOCOLE.md)
-          echo "$count sections de niveau 2"
-          if [ "$count" -lt 15 ]; then echo "ERREUR : sections manquantes"; exit 1; fi
-
-      - name: Aucune règle normative dans les adaptateurs
-        run: |
-          if grep -l -i -E 'interdit|obligatoire|non négociable|non-negociable' integrations/*.md; then
-            echo "ERREUR : règle normative trouvée dans un adaptateur"; exit 1
-          fi
-          echo "Aucune règle normative détectée."
-
-      - name: Scan de secrets (hors fichiers de vocabulaire)
-        run: |
-          if git grep -n -I -E 'gho_[A-Za-z0-9]|ghp_[A-Za-z0-9]|sk-[A-Za-z0-9]{10}|BEGIN [A-Z ]*PRIVATE KEY|AKIA[0-9A-Z]{16}' -- . ':!PROTOCOLE.md' ':!tools/pre-push-audit.ps1'; then
-            echo "ERREUR : motif de secret trouvé"; exit 1
-          fi
-          echo "Aucun motif de secret détecté."
-
-      - name: Adaptateurs présents
-        run: |
-          for f in opencode harness-dsh codex claude-code generic; do
-            test -f "integrations/$f.md" || { echo "ERREUR : integrations/$f.md manquant"; exit 1; }
-          done
-          echo "5 adaptateurs présents."
+          node --version
+          git --version
+          $PSVersionTable.PSVersion.ToString()
+      - name: Structure, UTF-8 et syntaxe
+        run: ./tools/validate.ps1
+      - name: Tests de sécurité et d'installation
+        run: node tests/tools.test.mjs
+      - name: Tests du suivi OpenCode isolé
+        run: node tests/context.test.mjs
+      - name: Tests des fins de ligne et du périmètre de validation
+        run: node tests/validate.test.mjs
+      - name: Audit des fichiers suivis sans exclusions
+        run: ./tools/pre-push-audit.ps1

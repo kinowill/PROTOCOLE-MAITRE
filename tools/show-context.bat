@@ -1,5 +1,7 @@
 @echo off
-rem Affiche la consommation de contexte de la session en cours.
-rem Place ce fichier sur le Bureau pour un acces en deux clics.
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0show_context.ps1"
+rem Affiche des statistiques OpenCode, pas le remplissage exact du contexte.
+rem Garder ce lanceur avec show_context.ps1 ; un raccourci peut pointer ici.
+pwsh.exe -NoProfile -File "%~dp0show_context.ps1"
+set "audit_exit=%ERRORLEVEL%"
 pause
+exit /b %audit_exit%

@@ -1,0 +1,2 @@
+# Keep the kernel byte budget identical on Windows and Linux checkouts.
+NOYAU.md text eol=lf
