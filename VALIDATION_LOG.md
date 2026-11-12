@@ -148,5 +148,13 @@
 - **Changements** : credentials Git non persistés après checkout, cache automatique
   désactivé (aucune dépendance à installer). Permissions `contents: read`
   conservées ; Node 22 reste la version utilisée par les tests du projet.
-- **Validation** : contrôles locaux de structure et audit avant publication,
-  puis exécution complète des deux jobs à observer sur cette nouvelle révision.
+- **Validation observée** : contrôles locaux de structure et audit avant
+  publication réussis ; révision technique `02706f4924955189f57578bc99074c02a9bd1286`
+  publiée et [run 43248575181](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/43248575181)
+  réussi sur Windows et Ubuntu, toutes les étapes exécutées. L'annotation
+  Node 20 obsolète a disparu. L'information générale de migration du label
+  `ubuntu-latest` vers Ubuntu 26 ne signale pas un échec du dépôt.
+- **État de clôture** : code publié et validations des outils réussies sur les
+  deux systèmes ; ce journal consigne la preuve de la révision technique dans
+  un commit documentaire séparé. Installations utilisateur et essais réels des
+  modèles restent non effectués, comme indiqué dans la roadmap.
