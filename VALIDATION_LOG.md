@@ -111,3 +111,23 @@
   contexte (5) sont inchangées et seront aussi rejouées par la CI.
 - **État** : correctif local validé sur Windows ; publication du correctif et
   nouveau résultat CI Linux/Windows à constater avant clôture.
+
+## 2026-11-12 - Correction publiée et validation distante réussie
+
+- **Révision vérifiée** : `53d49435d3e098d94dc58e5ca4f28cc57c4d3b70`,
+  correctif des fichiers cachés publié sur `main`.
+- **Preuve distante** : [run 43247447483](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/43247447483),
+  terminé avec succès sur Windows et Ubuntu. Chaque plateforme a exécuté les
+  contrôles structure/UTF-8/syntaxe, les 43 contrôles outils, les 5 contrôles de
+  suivi OpenCode et les 6 contrôles de validation/checkout, ainsi que le scanner.
+  Aucun de ces contrôles n'a été ignoré. Le premier échec Linux reste documenté
+  dans l'entrée précédente ; il ne décrit plus la révision publiée actuelle.
+- **Alignement constaté** : copie de travail propre ; `HEAD` et `origin/main`
+  identiques à cette révision. La clôture documentaire consigne ces preuves
+  dans un commit distinct, sans modification fonctionnelle.
+- **Trois états** : dépôt corrigé et publié ; GitHub aligné, installation globale
+  utilisateur non effectuée ; validations automatisées Windows/Linux réussies.
+- **Limites conservées** : pas de session réelle Entrim, DeepSeek ou OpenCode
+  Free, ni de validation comportementale du chargement, des permissions ou de
+  la reprise après compaction. Aucun fournisseur reconfiguré. Le noyau demeure
+  inchangé ; sa révision méthodologique reste à arbitrer dans la roadmap.
