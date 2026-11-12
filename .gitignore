@@ -1,3 +1,15 @@
-﻿*.verification.json
 .DS_Store
 Thumbs.db
+*.verification.json
+# Données locales et secrets ; un fichier déjà suivi reste à auditer.
+.env
+.env.*
+!.env.example
+*.bak
+*.backup
+*.pem
+*.key
+*.pfx
+*.p12
+*.log
+.opencode-local/
