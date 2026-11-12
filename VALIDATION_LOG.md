@@ -158,3 +158,15 @@
   deux systèmes ; ce journal consigne la preuve de la révision technique dans
   un commit documentaire séparé. Installations utilisateur et essais réels des
   modèles restent non effectués, comme indiqué dans la roadmap.
+
+## 2026-11-12 - Retrait de la release obsolète demandé
+
+- **Autorisation et attendu** : l'utilisateur demande de retirer la release
+  ancienne plutôt que d'en publier une nouvelle ; conserver le code courant.
+- **Action et preuve** : release GitHub `v1.0.0` du 23 septembre supprimée ;
+  `gh release list` renvoie une liste vide après suppression. Aucune nouvelle
+  release créée. Le tag historique `v1.0.0` est conservé et vérifié via l'API.
+- **Trois états** : code courant inchangé sur `main` (`d3f394a` avant cette trace),
+  page Releases sans publication ; CI Windows/Linux de cette révision réussie
+  ([run 43248849949](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/43248849949)).
+  Installation globale et validations comportementales des modèles non effectuées.

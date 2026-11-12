@@ -2,7 +2,7 @@
 
 ## État actuel
 
-- [x] Édition 1.1.0 publiée : dernière revue et CI Windows/Linux réalisées (journal).
+- [x] Édition 1.1.0 disponible sur `main` : dernière revue et CI Windows/Linux réalisées (journal).
 
 ## À vérifier avant intégration complète
 
@@ -14,6 +14,8 @@
 - [x] Commits revus publiés et CI vérifiée, alignement autorisé le 12/11/2026.
 
 ## Fait
+
+- [x] Release GitHub obsolète retirée à la demande de l'utilisateur ; code actuel disponible sur main.
 
 - [x] v1.0.0 : noyau, référence, 5 adaptateurs, templates, outils, CI.
 - [x] Audit OpenCode 2 et corrections locales de documentation, sécurité et tests.
