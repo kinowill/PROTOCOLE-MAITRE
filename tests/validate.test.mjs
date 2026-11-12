@@ -38,6 +38,12 @@ try {
   gitRun(['checkout-index', '-f', '--', 'NOYAU.md']);
   assert.deepEqual(readFileSync(join(fixture, 'NOYAU.md')), core, 'core must retain LF under autocrlf=true');
   console.log('OK LF checkout preserves kernel budget with autocrlf=true');
+  if (process.platform === 'win32') {
+    const hidden = spawnSync('attrib.exe', ['+H', join(fixture, '.gitattributes')], { encoding: 'utf8' });
+    assert.equal(hidden.status, 0, 'Cannot mark fixture metadata hidden');
+  }
+  assert.equal(validate().status, 0, 'tracked hidden metadata must be readable');
+  console.log('OK tracked hidden metadata included in validation');
   mkdirSync(join(fixture, '.opencode-local'));
   writeFileSync(join(fixture, '.opencode-local', 'broken.ps1'), 'function {');
   assert.equal(validate().status, 0, 'ignored private scripts must not enter repository validation');
@@ -47,9 +53,14 @@ try {
   assert.equal(validate().status, 1, 'new non-ignored script must be validated');
   console.log('OK untracked relevant files validated');
   unlinkSync(pending);
-  writeFileSync(join(fixture, 'invalid.md'), Buffer.from([0xff, 0xfe, 0xff]));
-  assert.equal(validate().status, 1, 'invalid UTF-8 must fail');
-  console.log('OK invalid UTF-8 rejected');
+  const hiddenInvalid = join(fixture, '.invalid.md');
+  writeFileSync(hiddenInvalid, Buffer.from([0xff, 0xfe, 0xff]));
+  if (process.platform === 'win32') {
+    const hidden = spawnSync('attrib.exe', ['+H', hiddenInvalid], { encoding: 'utf8' });
+    assert.equal(hidden.status, 0, 'Cannot mark invalid fixture hidden');
+  }
+  assert.equal(validate().status, 1, 'invalid hidden file must fail validation');
+  console.log('OK invalid hidden UTF-8 rejected');
 } finally {
   if (!resolve(fixture).startsWith(tempRoot + sep)) throw new Error('Unsafe fixture cleanup');
   rmSync(fixture, { recursive: true, force: true });

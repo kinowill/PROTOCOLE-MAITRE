@@ -93,3 +93,21 @@
 - **État à ce point** : validations locales réussies ; commits/publication et
   CI distante restent à constater. Aucun scénario fournisseur supplémentaire
   n'a été exécuté, ni aucune configuration utilisateur modifiée.
+
+## 2026-11-12 - Échec Linux observé et correction
+
+- **Révision publiée** : `34605f3`, après les commits séparés `3c6a53e`,
+  `2a98668` et `87654bc`. Publication effectuée, état local/distant aligné.
+- **Résultat CI réel** : [run 43246782140](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/43246782140)
+  échoué sur Ubuntu, réussi sur Windows. Ubuntu ne dépassait pas le contrôle
+  statique : `Get-Item` sans `-Force` ne retrouvait pas `.gitattributes`, caché
+  sur Linux. Les tests suivants étaient ignorés ; aucun succès Linux n'est revendiqué.
+- **Reproduction** : nouveau test avec métadonnée cachée, échec local observé
+  avant correction. Ajout de `-Force` uniquement à la lecture des fichiers
+  appartenant à l'inventaire Git. Aucun fichier n'est exclu pour contourner le défaut.
+- **Après correction** : les 6 contrôles de validation/checkout réussissent,
+  dont lecture d'une métadonnée cachée et rejet d'un fichier caché UTF-8 invalide.
+  Syntaxe, périmètre et `git diff --check` réussis. Les suites outils (43) et
+  contexte (5) sont inchangées et seront aussi rejouées par la CI.
+- **État** : correctif local validé sur Windows ; publication du correctif et
+  nouveau résultat CI Linux/Windows à constater avant clôture.

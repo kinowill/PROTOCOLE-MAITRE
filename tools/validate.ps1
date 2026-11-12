@@ -22,7 +22,7 @@ try {
   $files = foreach ($relative in (($paths -join "`n") -split [char]0)) {
     if ([string]::IsNullOrEmpty($relative)) { continue }
     $fullPath = Join-Path $root $relative
-    if (Test-Path -LiteralPath $fullPath -PathType Leaf) { Get-Item -LiteralPath $fullPath }
+    if (Test-Path -LiteralPath $fullPath -PathType Leaf) { Get-Item -LiteralPath $fullPath -Force }
   }
   $utf8 = [System.Text.UTF8Encoding]::new($false, $true)
   foreach ($file in $files) {
