@@ -9,6 +9,8 @@
 - Sécurité : scanner index/copie de travail, erreurs bloquantes et sorties
   sans valeurs secrètes ; vérification stricte du noyau et de sa version complète.
 - Tests isolés et CI Windows/Linux, scénarios multi-fournisseurs distincts.
+- CI : actions officielles checkout 7.0.1 et setup-node 7.1.0 sur moteur Node 24,
+  sans persistance des credentials Git ni cache automatique de dépendances.
 - Audit bloquant sur index partiel, noyau LF stable sous Windows/Linux, validation
   limitée aux fichiers du dépôt et actions CI figées sur des révisions vérifiées.
 - Audit de fond documenté ; noyau v1.0.0 conservé, sans refonte normative implicite.

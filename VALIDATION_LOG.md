@@ -131,3 +131,22 @@
   Free, ni de validation comportementale du chargement, des permissions ou de
   la reprise après compaction. Aucun fournisseur reconfiguré. Le noyau demeure
   inchangé ; sa révision méthodologique reste à arbitrer dans la roadmap.
+
+## 2026-11-12 - Actualisation des actions CI
+
+- **Observation** : la clôture documentaire `d5ebad0` a aussi passé les deux jobs
+  ([run 43248092610](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/43248092610)).
+  Une annotation GitHub signalait toutefois le moteur Node 20 obsolète des actions v4.
+- **Résultat attendu et préservation** : supprimer cette dépendance obsolète sans
+  retirer de test, changer la matrice ni augmenter les droits de la CI.
+- **Vérification officielle** : notes de version, `action.yml` et exigences de
+  migration consultés pour [checkout 7.0.1](https://github.com/actions/checkout/releases/tag/v7.0.1)
+  et [setup-node 7.1.0](https://github.com/actions/setup-node/releases/tag/v7.1.0).
+  Les deux utilisent Node 24 et sont épinglées à leurs commits vérifiés.
+  Les changements de déclencheurs PR privilégiés et d'authentification de registre
+  ne concernent pas ce workflow (`push`/`pull_request`, aucun registre configuré).
+- **Changements** : credentials Git non persistés après checkout, cache automatique
+  désactivé (aucune dépendance à installer). Permissions `contents: read`
+  conservées ; Node 22 reste la version utilisée par les tests du projet.
+- **Validation** : contrôles locaux de structure et audit avant publication,
+  puis exécution complète des deux jobs à observer sur cette nouvelle révision.
