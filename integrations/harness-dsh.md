@@ -2,6 +2,11 @@
 
 Outil en interface web, sessions liées à un espace de travail local.
 
+**Statut au 12/11/2026 :** observations historiques de septembre 2026,
+non revalidées sur un harnais actuel. Les détails ci-dessous décrivent cet
+environnement observé ; contrôler les chemins, plugins et capacités réellement
+installés avant de les utiliser. Ils ne décrivent pas DeepSeek via OpenCode.
+
 ## Surfaces d'injection (vérifiées dans le harnais, 2026-09)
 
 - **Fichier global d'instructions : `$DSH_HOME/AGENTS.md`** (sous Windows :
@@ -43,8 +48,8 @@ Outil en interface web, sessions liées à un espace de travail local.
 
 ## Valeurs propres
 
-- Modèle sous-jacent : DeepSeek V4 Pro (1 M de tokens annoncé, thinking par
-  défaut). Chiffres à vérifier dans l'environnement actif.
+- Le modèle et sa limite se vérifient dans l'environnement actif ; aucune
+  fenêtre ni aucun mode de raisonnement ne vaut pour tous les modèles DeepSeek.
 
 ## Limites connues
 

@@ -1,59 +1,117 @@
-# Adaptateur — opencode
+# Adaptateur — OpenCode 2
 
-Outil maintenu pour compatibilité. opencode combine des surfaces compatibles
-Claude Code
-et ses propres surfaces natives.
+Documentation officielle consultée le 12/11/2026 : [instructions](https://opencode.ai/docs/instructions/), [skills](https://opencode.ai/docs/skills/), [permissions](https://opencode.ai/docs/permissions/), [policies](https://opencode.ai/docs/policies/), [CLI](https://opencode.ai/docs/cli/commands/), [compaction](https://opencode.ai/docs/compaction/), [cache](https://opencode.ai/docs/models/#prompt-caching) et [warming](https://opencode.ai/docs/warming/). Documentation évolutive : relever aussi la version installée ; OpenCode 1 et 2 diffèrent.
 
-## Surfaces d'injection
+## Installation native
 
-| Surface | Chemin | Portée |
-|---|---|---|
-| `CLAUDE.md` (compat) | `~/.claude/CLAUDE.md` (global), `CLAUDE.md` (projet) | lu automatiquement |
-| `AGENTS.md` (natif) | racine du projet, généré par `/init` | lu automatiquement |
-| `opencode.json` | `~/.config/opencode/opencode.json` (global), projet | champ `instructions` : fichiers chargés |
+- Global : `~/.config/opencode/AGENTS.md`. Préserver les consignes existantes et ajouter le noyau intégral une seule fois. V2 reconnaît `AGENTS.md`, sans solution de repli `CLAUDE.md`.
+- Projet : `AGENTS.md` pour les spécificités locales. Les fichiers globaux, ceux du workspace et des ancêtres puis ceux du tableau `instructions` sont combinés. Les conflits de texte ne sont pas résolus automatiquement. Des fichiers descendants peuvent s'ajouter pendant l'exploration.
+- Examiner les chemins de configuration alternatifs et les sources effectives avant de choisir la cible globale. XDG et `OPENCODE_CONFIG_DIR` peuvent déplacer la configuration.
+- Conserver `PROTOCOLE.md` localement à une révision identifiée. Ne pas ajouter la référence complète à `instructions` si elle doit rester à la demande.
+- Sauvegarder les fichiers d'installation puis fusionner : aucune réécriture globale de la configuration n'est nécessaire. Préserver les providers, modèles, clés, sessions et réglages de cache/compaction.
+- Vérifier `tools/install-check.ps1 -Target <cible>`, puis SM-01 en session vierge. Le contrôle statique ne prouve ni le chargement ni l'obéissance du modèle.
 
-## Installation du protocole
+## Skill de référence
 
-- **Globale** : coller l'intégralité de `NOYAU.md` dans `~/.claude/CLAUDE.md`
-  (Windows : `C:\Users\<toi>\.claude\CLAUDE.md`), ou pointer le champ
-  `instructions` de `~/.config/opencode/opencode.json` vers le chemin local
-  de `NOYAU.md` et de `PROTOCOLE.md`.
-- **Projet** : `CLAUDE.md` court à la racine avec les spécificités du projet
-  (stack, commandes, sources de vérité) ; le noyau reste global.
-- **Hybride recommandé** : noyau + référence en global ; par projet, seulement
-  les spécificités.
+En dehors du bloc intégral du noyau, inclure ce repère de chargement dans les
+instructions globales lors de l'installation, sans résumer ni remplacer le noyau :
 
-## Fonctionnalités natives
+> Avant de conclure à un blocage, ou pour préciser une règle de sécurité,
+> qualité, communication, validation ou reprise, charger le skill `protocole-maitre` et lire
+> la section utile de sa référence locale. Le noyau reste prioritaire.
 
-- Agents : Build (tous les outils), Plan (lecture seule), General et Explore
-  (subagents).
-- Skills : `.agents/skills/`, `.opencode/skills/`, `.claude/skills/`,
-  `~/.config/opencode/skills/`.
-- LSP chargés automatiquement. Commandes : `/init`, `/undo`, `/redo`,
-  `/share`, `/connect`.
-- Compaction : agent automatique à l'approche de la limite de contexte.
-- `rtk` (Rust Token Killer) : wrapper de verbosité pour git/npm/cargo/tsc…
-  s'il existe dans l'environnement.
+Le dossier `skills/protocole-maitre/` du dépôt est un modèle d'installation :
 
-## Valeurs propres
+1. Copier son `SKILL.md` dans `~/.config/opencode/skills/protocole-maitre/`.
+2. Copier le `PROTOCOLE.md` de la même révision dans `references/PROTOCOLE.md`, sous ce dossier de skill.
+3. Copier aussi `integrations/opencode.md` vers `references/integrations/opencode.md`, à la même révision.
+4. Tester découverte, chargement et lecture de ces copies locales dans une session vierge.
 
-- Avec DeepSeek V4 Pro via opencode : fenêtre 1 000 000 tokens (thinking
-  inclus), sortie max 384 000, thinking par défaut, effort `max` pour les
-  agents de codage, cache disque de préfixe (hit ~12× moins cher), rate limit
-  dynamique (HTTP 429, timeout 10 min). Chiffres fournisseur : à vérifier
-  dans la configuration active.
-- Journaux de session : `~/.claude/projects/*.jsonl` (lus par
-  `tools/show_context.ps1`).
+L'ID vient du dossier `protocole-maitre`, pas de `name`. Le catalogue annonce
+nom et description ; le corps puis les fichiers d'appui sont chargés à la demande.
+`.opencode/skills/` est l'alternative projet ; éviter les doublons global/projet.
+La disponibilité dépend des permissions et de la configuration de skills.
 
-## Commande de monitoring
+## Permissions et politiques V2
 
+V2 utilise `permissions` (tableau), `shell` et `subagent`, à la place des anciennes
+clés `permission`, `bash` et `task`. Chaque règle porte `action`, `resource`,
+`effect` (`allow`, `ask`, `deny`). La dernière règle correspondante gagne.
+Les règles d'agent sont ajoutées après les globales ; un sous-agent personnalisé
+utilise ses propres permissions. Vérifier les règles effectives de chaque agent.
+
+Exemple à examiner et fusionner dans la configuration existante :
+
+```json
+{
+  "permissions": [
+    { "action": "shell", "resource": "*", "effect": "ask" },
+    { "action": "shell", "resource": "git status --short", "effect": "allow" },
+    { "action": "shell", "resource": "git diff --no-ext-diff --no-textconv", "effect": "allow" },
+    { "action": "shell", "resource": "git push *", "effect": "ask" },
+    { "action": "external_directory", "resource": "*", "effect": "ask" }
+  ]
+}
 ```
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "<chemin local du protocole>\tools\show_context.ps1"
+
+Les autorisations de l'exemple sont des commandes exactes : un motif large comme
+`git diff *` couvrirait aussi des options d'écriture ou de diff externe.
+Les `policies` sont distinctes. Une règle telle que
+`{"action":"tool.use","resource":"shell:git push *","effect":"deny"}`
+dans `policies` apporte un refus dur pour ce motif, y compris face aux permissions
+d'agents et approbations sauvegardées. Elle ne couvre pas tous les moyens de
+publier. Une politique invalide peut être ignorée avec avertissement.
+
+Les permissions textuelles ne sont pas une isolation du système : le shell garde
+les pouvoirs de l'utilisateur. Tester les commandes composées, les accès hors
+projet et les autres agents dans un dossier d'essai, sans publication réelle.
+Une liste de commandes bloquées ne prouve pas une protection exhaustive.
+
+## Contexte et statistiques
+
+Commandes V2 documentées, à confirmer par l'aide locale :
+
+```powershell
+opencode --version
+opencode stats --models --cost
+opencode stats --json
+opencode session list --max-count 20 --format json
+opencode debug paths db
+pwsh -NoProfile -File tools/show_context.ps1
+pwsh -NoProfile -File tools/show_context.ps1 -Mode Sessions
 ```
 
-## Limites connues
+`stats` mesure l'usage, pas le remplissage exact du contexte actif. La limite
+dépend du modèle. Le script ne lit aucune ancienne trace Claude et ne calcule
+aucun pourcentage arbitraire. `-Mode Paths` affiche le chemin de la base sans
+la modifier. Les sorties peuvent contenir des chemins et titres privés.
 
-- Les chemins `~/.claude/` dépendent de la compatibilité Claude Code ; à
-  vérifier selon la version d'opencode installée.
-- La présence d'un `CLAUDE.md` ne prouve pas le chargement : vérification en
-  nouvelle session (scénario SM-01 de VALIDATION_SCENARIOS.md).
+La compaction automatique utilise le budget du modèle. Préserver les réglages
+`compaction.auto`, `compaction.keep.tokens` et `compaction.buffer` existants.
+Elle peut perdre des détails et ne réduit pas les instructions fixes volumineuses.
+Les checkpoints natifs chiffrés restent liés au fournisseur et au modèle ; après
+changement, OpenCode repart de la conversation originale. Les faits de reprise
+restent dans les documents du projet.
+
+## Cache et indépendance des modèles
+
+Le cache dépend de l'endpoint et du modèle : ni hit, ni durée, ni prix ni transfert
+entre fournisseurs ne sont garantis. Ne pas ajouter un format de cache Anthropic
+à un fournisseur compatible OpenAI sans preuve de compatibilité. Le warming,
+désactivé par défaut, émet de vraies requêtes pouvant être facturées et consommer
+des limites ; son activation ne fait pas partie de l'installation du protocole.
+
+Entrim, DeepSeek et OpenCode Free reçoivent les instructions par OpenCode.
+Préserver providers, URLs, credentials, variantes, modèle par défaut, variables
+de service et sessions. Ne pas ajouter de filtre `provider.use`, de liste de
+fournisseurs ni `OPENCODE_DISABLE_FREE_MODELS` pour installer les règles.
+Les IDs et la disponibilité se vérifient dans `/models` ou `opencode models` ;
+ne pas inventer de catalogue Entrim. [Providers](https://opencode.ai/docs/providers/).
+
+## Validation
+
+Tester séparément les fournisseurs/modèles utilisés, les consignes locales,
+les permissions, le skill, puis la reprise après compaction et changement de modèle.
+Les mêmes instructions ne garantissent pas la même fiabilité. Distinguer les
+sources effectivement injectées du seul comportement observé. Ne jamais afficher
+de clés ou de configuration privée dans le compte rendu.
