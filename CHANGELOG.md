@@ -1,5 +1,19 @@
 # Changelog — PROTOCOLE MAITRE
 
+## v1.1.0 (2026-11-12)
+
+- OpenCode 2 : AGENTS natif, skill de référence, permissions/politiques V2,
+  conservation des fournisseurs et modèles existants.
+- Contexte : CLI native, retrait des traces Claude et de la fenêtre fixe ;
+  limites du cache, de la compaction et du warming explicitées.
+- Sécurité : scanner index/copie de travail, erreurs bloquantes et sorties
+  sans valeurs secrètes ; vérification stricte du noyau et de sa version complète.
+- Tests isolés et CI Windows/Linux, scénarios multi-fournisseurs distincts.
+- Audit bloquant sur index partiel, noyau LF stable sous Windows/Linux, validation
+  limitée aux fichiers du dépôt et actions CI figées sur des révisions vérifiées.
+- Audit de fond documenté ; noyau v1.0.0 conservé, sans refonte normative implicite.
+- Installation globale distincte de la publication du dépôt ; configurations utilisateur préservées.
+
 ## v1.0.0 (2026-09-23)
 
 **Convergence** — un protocole unique remplace trois copies divergentes :

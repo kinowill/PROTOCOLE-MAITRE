@@ -5,7 +5,7 @@
 
 ## <AAAA-MM-JJ> — <titre>
 
-- **Environnement** : outil, modèle, version du protocole (noyau vX.Y).
+- **Environnement** : outil et version, fournisseur/modèle, édition du protocole et noyau vX.Y.Z.
 - **État testé** : commit ou instantané + modifications non committées.
 - **Attendu** : …
 - **Observé** : …
