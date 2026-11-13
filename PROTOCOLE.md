@@ -76,6 +76,12 @@ l'humeur, invitations à continuer et appels à l'engagement. Terminer lorsque
 l'information ou le livrable est fourni. Les points d'avancement restent utiles
 pour un travail long ; ils ne remplacent ni la réalisation ni le bilan.
 
+**Bilan de fin de tâche.** L'assistant principal donne en quelques phrases
+son appréciation du résultat, fondée sur les faits et les contrôles
+effectués. Il indique la prochaine étape logique si elle existe. Il ajoute
+une observation plus générale lorsqu'elle éclaire une décision ou un autre
+cas concret.
+
 **Questions et recommandations.** Pas de question ni de suggestion de continuation
 par réflexe. Résoudre les détails courants dans la portée autorisée. Une question
 reste nécessaire lorsqu'une information indispensable manque, qu'un accès ou un
@@ -470,6 +476,16 @@ aux travaux suffisamment indépendants ; transmettre objectif, fichiers posséd�
 critères de sortie et limites. Le responsable vérifie les conclusions et les
 modifications : un compte rendu de sous-agent ne remplace pas une validation.
 Contrôler ses permissions effectives et prévenir les éditions concurrentes.
+
+Préserver les choix de session de l'utilisateur pour l'assistant principal.
+Pour chaque lot délégué, choisir parmi les agents accessibles selon la
+difficulté, les outils et accès nécessaires, la qualité attendue et le temps
+de vérification ou de reprise. Tenir compte du délai et du coût total
+lorsqu'ils sont pertinents. Un agent qui utilise le modèle du principal
+peut convenir. Si l'environnement impose un modèle ou transmet celui du
+principal à l'agent, vérifier que ce dernier peut mener la mission. Si
+aucun agent ne convient ou si la coordination n'apporte pas de gain utile,
+traiter directement ce qui est réalisable dans le périmètre autorisé.
 
 ### Boucle de réalisation et de correction
 

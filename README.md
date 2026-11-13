@@ -25,7 +25,7 @@ projet. Ce protocole transforme ce risque en processus contrôlable.
 | `skills/protocole-maitre/` | Modèle de skill de référence à la demande. |
 | `tools/validate.ps1` et `tests/` | Contrôles et tests isolés (PowerShell 7, Node.js 22+, Git). |
 | `AUDIT_2026-11-12.md` | Corrections, sources et propositions sur les mécanismes du protocole. |
-| `VALIDATION_SCENARIOS.md` | Méthode de validation comportementale (SM-01…SM-11). |
+| `VALIDATION_SCENARIOS.md` | Méthode de validation comportementale (SM-01…SM-12). |
 | `VALIDATION_LOG.md` | Ce qui a été réellement vérifié, et les limites. |
 
 ## Démarrage rapide (délégué à l'IA)
@@ -95,7 +95,7 @@ les décisions et pourquoi, les blocages. C'est le critère « fresh eyes »
 ## État du dépôt
 
 Édition 1.1.0 du 12/11/2026, noyau v1.0.0 inchangé. Publication et installation sont distinctes des validations locales : consulter `VALIDATION_LOG.md`. Chaque intégration est vérifiée par l'intégrateur
-selon la méthode `VALIDATION_SCENARIOS.md` (SM-01…SM-11) et le contrat
+selon la méthode `VALIDATION_SCENARIOS.md` (SM-01…SM-12) et le contrat
 d'intégration ci-dessus.
 
 ## OpenCode 2 et vérification locale
