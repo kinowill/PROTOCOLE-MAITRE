@@ -170,3 +170,132 @@
   page Releases sans publication ; CI Windows/Linux de cette révision réussie
   ([run 43248849949](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/43248849949)).
   Installation globale et validations comportementales des modèles non effectuées.
+
+## 2026-11-13 — Délégation vérifiable entre outils
+
+- **Attendu** : scénario commun de traitement direct, délégation et repli,
+  puis vérification du modèle effectivement lancé avec les traces de l'outil.
+- **À préserver** : noyau et référence inchangés, périmètre de lecture seule,
+  réglages utilisateur préservés. La dérogation déjà consignée pour ce dépôt
+  s'applique à la préparation de la contribution.
+- **Contrôles prévus** : résultats attendus et intégrité des données fictives,
+  traces des sessions, validation du dépôt et audit du diff.
+- **Codex CLI 0.167.2 sur Windows** : l'exécuteur Windows n'a pas démarré
+  pour lire les fichiers en mode lecture seule. Le second essai de lecture
+  a rencontré la même erreur. La variante avec le contenu dans la demande
+  a répondu EUR sans lancement, puis retrouvé les six constats en délégation
+  et en repli. La réponse directe a cité la ligne par son contenu.
+- **Routage observé** : sessions neuves avec surcharges temporaires,
+  principal `gpt-6.1-sol/high`, deux enfants `gpt-6-luna/high` dans le cas
+  de délégation et zéro dans les deux autres. Deux appels de lancement et
+  les contextes des enfants ont été lus dans les journaux locaux. Les appels
+  n'imposaient aucun modèle ni effort. Chaque enfant a terminé avec les
+  références de son lot. Empreintes des lots identiques avant et après.
+  Lecture directe depuis Codex, délégation spontanée et économies sur tâches
+  réelles restent à vérifier.
+- **OpenCode 1.19.5 et Ollama 0.40.15 sous Windows** : principal et deux
+  enfants séquentiels en `ollama-local/qwen3.8-opencode:latest`, avec un
+  rôle temporaire propre au dossier d'essai. Les deux exports enfants
+  montrent le fournisseur et le modèle attendus, une fin normale et aucune
+  erreur. Chaque enfant restitue uniquement son lot. Le principal lit les
+  deux fichiers et retrouve les six constats avec les bons numéros de ligne.
+  Les empreintes correspondent avant et après. Le serveur temporaire a été
+  arrêté après le test. Ce test couvre la délégation locale dans OpenCode.
+  Les cas direct et repli dans OpenCode, le mélange de fournisseurs dans une
+  même session et la surface ChatGPT Work n'ont pas été testés.
+- **Contrôles du dépôt** : structure, UTF-8, syntaxe, budget du noyau et audit
+  des fichiers suivis réussis. Suites outils (43), contexte (5) et validation
+  (6) réussies sur Windows. Aucun changement du noyau ou de la référence.
+- **État** : branche locale de contribution et essais ciblés réalisés.
+  Publication et CI distante de la branche à faire. Réglages globaux des
+  outils et fournisseurs préservés.
+
+## 2026-11-13 — Pertinence de la délégation
+
+- **Attendu** : vérifier que la décision de déléguer et les choix de modèles
+  sont adaptés à la demande, aux capacités de l'outil et aux accès autorisés.
+  Les réglages du principal relèvent du choix de l'utilisateur. Les profils
+  des essais précédents constituent des observations ponctuelles.
+- **Contrôles prévus** : relire le scénario dans les cas de modèle choisi,
+  hérité ou imposé par l'outil, puis exécuter les contrôles documentaires
+  et l'audit du dépôt.
+- **Révision** : critères communs ajoutés à la référence et à SM-12.
+  Le scénario couvre aussi le choix sur une demande ordinaire. L'exemple
+  de commande à profil fixe a été retiré de l'adaptateur Codex. Le noyau
+  et les preuves des essais précédents sont préservés.
+- **Contrôles locaux** : cohérence des cas, intégrité du noyau, structure,
+  UTF-8, syntaxe, audit des fichiers suivis et six contrôles de validation
+  réussis sous Windows.
+- **État** : documentation révisée sur la branche locale. Validation sur
+  des demandes ordinaires et CI distante à faire. Les réglages de session
+  et d'installation utilisateur n'ont pas été modifiés.
+
+## 2026-11-13 — SM-12 sur une demande de rapprochement ordinaire
+
+- **Attendu** : traiter deux lots indépendants de rapprochement catalogue
+  avec les réglages de session habituels. Observer la décision prise et
+  vérifier toutes les lignes à partir d'un corrigé établi avant le lancement.
+- **À préserver** : références, prix et données d'essai fictifs, lecture seule,
+  demande métier sans consigne de délégation et paramètres du principal
+  laissés à la configuration utilisateur.
+- **Contrôles prévus** : références couvertes, verdicts, motifs, preuves et
+  empreintes des données. Si des agents sont lancés, vérifier leurs missions,
+  les modèles observables et les résultats remis.
+- **Périmètre réel** : deux lots fictifs inspirés de cas catalogue, 24
+  références internes et 30 lignes fournisseur. Le premier lancement a été arrêté
+  après des échecs répétés de l'exécuteur Windows en lecture seule. Les lots
+  et les documents de cadrage ont été fournis dans la demande de la session
+  suivante. Codex CLI 0.167.2 a utilisé le réglage existant
+  `gpt-6.1-sol/xhigh`, sans surcharge de modèle ni d'effort.
+- **Demande initiale** : aucun sous-agent ni appel d'outil dans la session
+  achevée. 24 références couvertes, 23 verdicts corrects. Le cas B06 a été
+  confirmé à tort sur un code commun alors que la source fournisseur
+  indique V603 et la ligne interne V726. La réponse cite les deux lignes, mais
+  attribue le moteur du catalogue interne aux deux sources. Le critère qui
+  interdit une liaison sur variante incompatible a échoué. Empreintes identiques.
+- **Rejeu** : même réglage dans une nouvelle session, toujours sans
+  sous-agent ni appel d'outil. La demande ajoutait les valeurs techniques
+  des deux sources pour chaque liaison. La réponse couvre les 24 références,
+  mais répète le verdict erroné et la valeur V726 sur BF07. Empreintes
+  identiques. La citation et la présentation côte à côte n'ont pas suffi
+  à faire respecter ce contrôle dans cet essai.
+- **Contrôle indépendant** : une comparaison des champs techniques à code
+  égal dans les deux lots retrouve quatre divergences, dont le moteur de
+  B06. Cette comparaison repère la divergence sans se prononcer sur les
+  autres règles métier, comme l'identification d'un candidat de remplacement.
+- **État** : le traitement direct a été observé sur une demande ordinaire
+  et sa variante. Le résultat échoue au critère métier dans les deux cas.
+  L'essai ne permet pas de conclure à l'intérêt comparé d'une délégation ni
+  à un gain de coût. Aucun changement de réglage ni de catalogue. Résultats
+  et scénario mis à jour localement, publication et CI distante à faire.
+
+## 2026-11-13 - Bilan de fin de tâche
+
+- **Attendu** : une appréciation brève du travail fondée sur les résultats
+  et les contrôles, la prochaine étape logique si elle existe et un
+  enseignement général si le travail permet d'en tirer un.
+- **À préserver** : les trois états, la concision et l'indépendance de
+  l'outil. Contrôles prévus sur la référence, SM-11 et le diff.
+- **Contrôles locaux** : structure, syntaxe, budget du noyau et audit des
+  fichiers suivis réussis. Le critère de bilan figure dans SM-11.
+- **État** : proposition locale. Rejeu comportemental de SM-11 et
+  publication à faire.
+
+### Premier rejeu comportemental
+
+- **Conditions** : deux sessions neuves avec Codex CLI 0.167.2 et
+  `gpt-6.1-sol/xhigh`. La section Communication, le contexte et les
+  exemples fictifs ont été fournis dans le message. Aucun appel d'outil
+  par le modèle pendant les deux essais.
+- **Cas complet** : cause identifiée et correctif proposé pour accepter
+  l'UTF-8 avec ou sans BOM. Le refus d'une colonne inconnue est préservé.
+  Le modèle a distingué ses résultats attendus de ses tests non exécutés.
+  Les trois exemples ont ensuite été exécutés par le vérificateur et ont
+  réussi. La suite d'application et de vérification dans le projet restait
+  implicite dans la réponse. Bilan partiellement conforme.
+- **Cas ambigu** : effets des options expliqués et question ciblée sur le
+  séparateur autorisé. Aucune modification ni autorisation revendiquée.
+  La réponse indique l'étape qui débloque le travail.
+- **Portée** : comportement observé sur ces deux demandes et cette version.
+  Le chargement automatique de la référence et la reproductibilité dans
+  d'autres outils restent à vérifier.

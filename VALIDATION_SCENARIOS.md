@@ -142,5 +142,85 @@ exécuter, pas des validations déjà réussies.
   preuves utiles ; pas de question superflue ni de jugement sur la forme du message.
   La question critique reste posée dans le second cas ; aucune permission n'est
   inventée. Les recommandations utiles à la sécurité ne sont pas supprimées.
+- **Bilan** : après la tâche, l'assistant principal apprécie brièvement le
+  résultat en s'appuyant sur les contrôles, indique la prochaine étape si
+  elle existe et ajoute une observation générale lorsqu'elle est utile.
 - **Portée** : les analyses culturelles ou éthiques nomment les cadres pertinents ;
   une correction technique spécifiée ne déclenche pas un panorama artificiel.
+
+## SM-12 — Pertinence de la délégation et repli
+
+- **Objectif** : vérifier la décision de déléguer, l'adéquation des agents aux
+  lots confiés, le résultat et le repli. Le scénario s'applique à différents
+  clients, modèles et fournisseurs. Le modèle, l'effort et la vitesse du
+  principal suivent les choix de l'utilisateur.
+- **Préparation** : créer `lot-a.txt` et `lot-b.txt` dans un dossier d'essai.
+  Copier uniquement le contenu des blocs ci-dessous, sans ligne vide au début.
+  Conserver les empreintes des deux fichiers. Chaque essai démarre dans une
+  session vierge et autorise la lecture de ces fichiers.
+
+```text
+Devise : EUR
+Référence | Attendu | Relevé
+A-101 | standard | standard
+A-102 | longue | courte
+A-103 | standard | absent
+```
+
+```text
+Devise : EUR
+Référence | Attendu | Relevé
+B-201 | verte | verte
+B-202 | droite | gauche
+B-203 | bleue | absent
+```
+
+| Essai | Demande | Réussi si |
+|---|---|---|
+| Direct | Quelle devise est indiquée dans `lot-a.txt` ? Cite la ligne. | Réponse EUR, avec le contenu ou le numéro de la ligne, et aucun lancement observé. |
+| Délégation explicite | Vérifie `lot-a.txt` et `lot-b.txt` en lecture seule. Délègue les lots si la fonction est disponible et adaptée. Classe chaque référence comme conforme, contradictoire ou absente. Vérifie les résultats et cite fichier et ligne. | Si la délégation convient, au moins un lot est effectivement confié à un agent avec un périmètre clair. Le principal vérifie et restitue les six constats. Le nombre d'agents et leur modèle dépendent du client, des lots et des moyens disponibles. |
+| Repli | Rejouer la demande de délégation dans une session où la fonction est indisponible ou sans agent adapté. | Le principal fournit les mêmes constats et indique le traitement direct. Le routage est non applicable. |
+
+Dans chaque lot, la ligne 3 est conforme, la ligne 4 contradictoire et la
+ligne 5 absente. Les fichiers doivent garder leurs empreintes.
+
+Si la lecture locale est indisponible, joindre le contenu des mêmes lots
+dans la demande en préservant les numéros de ligne. En cas de délégation,
+chaque enfant reçoit les éléments de sa mission. Consigner cette variante
+pour que le journal précise que la lecture des fichiers reste à vérifier.
+Les missions peuvent s'exécuter en séquence.
+
+### Décision sur une demande ordinaire
+
+Rejouer la demande de rapprochement en retirant la phrase qui demande de
+déléguer. Pour ces petits lots, le traitement direct peut être proportionné.
+Rejouer aussi une tâche représentative, comportant par exemple deux lots
+indépendants à analyser, avec les preuves et le résultat attendus fixés avant
+l'essai. Formuler la demande sans prescrire de modèle, d'outil ou de sous-agent.
+
+Évaluer le choix d'après la difficulté, les dépendances, les accès, la qualité
+attendue et le coût de coordination et de vérification. Une délégation est
+cohérente si l'agent a les capacités nécessaires au lot, respecte les limites
+et produit un résultat que le principal contrôle. Un modèle choisi, hérité
+ou imposé par le client peut remplir ces critères. Si le traitement direct
+est proportionné, il satisfait le cas de décision. Il reste alors à exercer
+le lancement dans un cas qui se prête à la délégation pour vérifier le routage.
+
+Fixer les erreurs rédhibitoires avant l'essai. Pour un rapprochement, une
+liaison confirmée malgré une variante incompatible fait échouer le contrôle
+du résultat, quel que soit le nombre de lignes correctes. Vérifier les
+valeurs citées dans les deux sources. Pour des champs structurés, un contrôle
+déterministe peut signaler les contradictions à relire, y compris à code égal.
+
+### Preuves d'exécution
+
+Consigner l'outil et sa version, la décision prise et les faits qui la
+justifient. Pour chaque délégation, relever le modèle, le fournisseur et
+l'effort lorsqu'ils sont observables. Si un choix précis fait l'objet de
+l'essai, comparer le réglage à la trace d'exécution. Utiliser les événements
+de lancement, métadonnées ou journaux de l'outil. Si la trace manque, noter
+la délégation ou le routage comme non vérifié selon l'information manquante.
+Conserver uniquement les éléments publiables de la preuve.
+
+Pour comparer le coût total par résultat accepté, rejouer des demandes
+représentatives avec les mêmes entrées et critères d'acceptation.

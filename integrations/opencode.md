@@ -108,6 +108,23 @@ fournisseurs ni `OPENCODE_DISABLE_FREE_MODELS` pour installer les règles.
 Les IDs et la disponibilité se vérifient dans `/models` ou `opencode models` ;
 ne pas inventer de catalogue Entrim. [Providers](https://opencode.ai/docs/providers/).
 
+## Sous-agents et vérification
+
+Un agent peut utiliser un autre modèle ou fournisseur que le principal, avec
+l'identifiant `fournisseur/modèle` d'un fournisseur configuré. Un fournisseur
+local peut servir de cible si son serveur répond et expose le modèle demandé.
+[Agents V2](https://opencode.ai/docs/agents/) · [Agents V1](https://opencode.ai/v1/docs/agents/#model)
+
+Pour SM-12, un rôle temporaire dans le dossier d'essai est une option pour
+vérifier un choix explicite de modèle en conservant le principal configuré.
+Les commandes et permissions dépendent de la version. Dans OpenCode 1.19.5,
+le résultat de l'outil `task` indique la session enfant et le modèle
+sélectionné. `opencode export <id> --sanitize`
+permet de contrôler `info.providerID` et `info.modelID` dans les messages
+assistant de l'enfant et de vérifier l'absence d'erreur. Un extrait limité à
+ces champs et à l'état du tour suffit au journal public.
+[Délégation dans la version 1.19.5](https://github.com/anomalyco/opencode/blob/v1.19.5/packages/opencode/src/tool/task.ts#L161-L175) · [Export V1](https://opencode.ai/v1/docs/cli/#export)
+
 ## Validation
 
 Tester séparément les fournisseurs/modèles utilisés, les consignes locales,
