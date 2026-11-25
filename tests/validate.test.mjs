@@ -12,15 +12,24 @@ const pwsh = process.platform === 'win32' ? 'pwsh.exe' : 'pwsh';
 function gitRun(args) {
   const result = spawnSync(git, args, { cwd: fixture, encoding: 'utf8' });
   assert.equal(result.status, 0, 'Fixture Git command failed');
+  return result.stdout;
 }
-function validate() {
-  const result = spawnSync(pwsh, ['-NoProfile', '-File', join(repo, 'tools', 'validate.ps1'), '-Path', fixture], { encoding: 'utf8', timeout: 30000 });
+function validate({ legacyConsole = false } = {}) {
+  const script = join(repo, 'tools', 'validate.ps1');
+  const args = legacyConsole
+    ? ['-Command', '[Console]::OutputEncoding = [Text.Encoding]::Latin1; & $env:PROTOCOLE_TEST_VALIDATOR -Path $env:PROTOCOLE_TEST_REPO']
+    : ['-File', script, '-Path', fixture];
+  const env = { ...process.env, PROTOCOLE_TEST_VALIDATOR: script, PROTOCOLE_TEST_REPO: fixture };
+  const result = spawnSync(pwsh, ['-NoProfile', ...args], { encoding: 'utf8', env, timeout: 30000 });
   if (result.error) throw result.error;
   return result;
 }
 try {
   gitRun(['init', '-q']);
   gitRun(['config', 'core.autocrlf', 'true']);
+  const ignoreFile = join(fixture, '.git', 'fixture-excludes');
+  writeFileSync(ignoreFile, '');
+  gitRun(['config', 'core.excludesFile', ignoreFile]);
   const corePath = join(fixture, 'NOYAU.md');
   const core = readFileSync(join(repo, 'NOYAU.md'));
   // Exercise the byte limit even if a later canonical kernel is shorter.
@@ -30,8 +39,9 @@ try {
   const referencePath = join(fixture, 'PROTOCOLE.md');
   const reference = readFileSync(join(repo, 'PROTOCOLE.md'), 'utf8');
   writeFileSync(referencePath, reference);
-  mkdirSync(join(fixture, 'integrations'));
-  for (const adapter of ['opencode', 'harness-dsh', 'codex', 'claude-code', 'generic']) writeFileSync(join(fixture, 'integrations', adapter + '.md'), '# Adapter\n');
+  const adapters = process.platform === 'win32' ? 'INTEGRATIONS' : 'integrations';
+  mkdirSync(join(fixture, adapters));
+  for (const adapter of ['opencode', 'harness-dsh', 'codex', 'claude-code', 'generic']) writeFileSync(join(fixture, adapters, adapter + '.md'), '# Adapter\n');
   gitRun(['add', '.']);
   unlinkSync(corePath);
   gitRun(['checkout-index', '-f', '--', 'NOYAU.md']);
@@ -74,7 +84,7 @@ try {
   assert.equal(validate().status, 0, 'a heading in a fenced example is a valid citation');
   console.log('OK fenced heading citation accepted');
   writeFileSync(referencePath, reference);
-  const adapterPath = join(fixture, 'integrations', 'generic.md');
+  const adapterPath = join(fixture, adapters, 'generic.md');
   writeFileSync(adapterPath, '# Adapter\n\nLe client affiche « approbation obligatoire » lorsque la politique interdit une opération.\n');
   const citation = validate();
   assert.equal(citation.status, 0, 'client permission terminology must not make an adapter invalid');
@@ -84,9 +94,12 @@ try {
   assert.equal(validate().status, 1, 'an adapter must not duplicate the kernel');
   console.log('OK embedded kernel rejected in adapter');
   writeFileSync(adapterPath, '# Adapter\n');
-  const addedAdapter = join(fixture, 'integrations', 'new-client.md');
+  const addedAdapter = join(fixture, adapters, 'new-client.md');
   writeFileSync(addedAdapter, '# Adapter\n\n' + core.toString('utf8'));
-  assert.equal(validate().status, 1, 'a new non-ignored adapter is covered by structural checks');
+  assert.ok(gitRun(['ls-files', '--others', '--exclude-standard', '-z']).split('\0').includes(adapters + '/new-client.md'), 'fixture adapter must appear in Git inventory');
+  const invalidAdapter = validate();
+  assert.equal(invalidAdapter.status, 1, 'a new non-ignored adapter is covered by structural checks');
+  assert.match(invalidAdapter.stdout, /du noyau repris dans integrations\/new-client\.md/);
   console.log('OK untracked adapter validated');
   unlinkSync(addedAdapter);
   mkdirSync(join(fixture, '.opencode-local'));
@@ -99,9 +112,16 @@ try {
   console.log('OK untracked relevant files validated');
   unlinkSync(pending);
   const unicodeFile = join(fixture, 'élève.md');
+  writeFileSync(unicodeFile, '# Texte UTF-8\n');
+  assert.equal(validate({ legacyConsole: true }).status, 0, 'valid Unicode file works with a legacy console encoding');
+  console.log('OK valid Unicode filename accepted with a legacy console encoding');
   writeFileSync(unicodeFile, Buffer.from([0xff]));
   assert.equal(validate().status, 1, 'new file with a Unicode name must be validated');
   console.log('OK file with Unicode name validated');
+  const invalidUnicode = validate({ legacyConsole: true });
+  assert.equal(invalidUnicode.status, 1, 'Git path decoding must be independent of the console encoding');
+  assert.match(invalidUnicode.stdout, /UTF-8 invalide/);
+  console.log('OK Unicode paths validated independently of console encoding');
   unlinkSync(unicodeFile);
   const hiddenInvalid = join(fixture, '.invalid.md');
   writeFileSync(hiddenInvalid, Buffer.from([0xff, 0xfe, 0xff]));

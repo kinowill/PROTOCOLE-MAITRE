@@ -1,5 +1,44 @@
 # Journal de validation — PROTOCOLE MAITRE
 
+## 2026-11-25 — Correction du contrôle des chemins Git
+
+- **Reproduction** : sous PowerShell 7.6.10, le nouvel adaptateur est présent
+  dans `git ls-files`, mais une variation de casse du répertoire Windows
+  reproduit la sortie 0 incorrecte. C'est une reproduction équivalente ;
+  la normalisation exacte du chemin du runner distant n'est pas observée.
+  Autre défaut reproduit : un fichier Unicode invalide est contrôlé sous
+  console UTF-8 et manqué sous console Latin1.
+- **Correction** : flux Git lu en octets, UTF-8 strict et séparation NUL ;
+  classement à partir des chemins relatifs Git, comparaison ordinale
+  insensible à la casse sous Windows et exacte sous Linux. Options de
+  l'inventaire et exclusions privées conservées. Les fixtures isolent leurs
+  exclusions Git et vérifient aussi le cas Unicode valide sous console Latin1.
+- **Vérifications locales** : les 19 contrôles ciblés passent avec
+  PowerShell 7.6.10 et 7.7.0. Rejeu indépendant sur 7.6.10 réussi ; validation
+  statique et contrôle du diff réussis. Revue indépendante du diff sans point
+  bloquant. Aucun test retiré ni attente abaissée. Le rejeu distant reste à
+  observer avant de déclarer les deux systèmes validés.
+
+## 2026-11-25 — Publication de la proposition et premier contrôle distant
+
+- [PR #2](https://github.com/kinowill/PROTOCOLE-MAITRE/pull/2) ouverte
+  au-dessus de la #1, base `docs/delegation-review`. Commits
+  `406d91b`, `f7aa05a` et `af82858` publiés après audit du diff, de l'index
+  et de la copie de travail, nouveaux fichiers inclus. Auteur et auteur
+  du commit vérifiés : VIA Motoculture. La #1 reste à `37e63b7`.
+- [Premier passage CI](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/45604366705)
+  sur `af82858753982b01c0eb23e0772cf4e646145c82` : Linux réussi, y compris
+  les neuf scénarios du diagnostic et le cas de fichier non ordinaire.
+  Windows échoue sur l'adaptateur nouveau non ignoré, après les douze
+  premiers contrôles de `validate.test.mjs` : sortie 0 au lieu de 1.
+  Cet échec distant n'est pas assimilé au succès local précédent.
+- **Environnement distant observé** : Node.js 22.23.5, PowerShell 7.6.10,
+  Git 2.56.1 sous Linux et 2.56.1.windows.1 sous Windows.
+- **Correction attendue** : rétablir la validation des nouveaux adaptateurs
+  dans l'environnement Windows concerné, préserver le périmètre Git et
+  les exclusions privées, puis rejouer les contrôles concernés et les deux
+  systèmes en CI. Aucun contrôle retiré ni installation utilisateur modifiée.
+
 ## 2026-11-25 — Édition proposée 1.2.0 : contrôles locaux
 
 - **État testé** : base `37e63b78653176289418c90c29c7e469e76a8b43`

@@ -39,6 +39,32 @@ function Test-Adapter([string]$content, [string]$name) {
   }
 }
 
+function Get-GitPaths([string]$executable, [string]$root) {
+  $startInfo = [System.Diagnostics.ProcessStartInfo]::new($executable)
+  $startInfo.WorkingDirectory = $root
+  $startInfo.UseShellExecute = $false
+  $startInfo.RedirectStandardOutput = $true
+  $startInfo.RedirectStandardError = $true
+  foreach ($argument in @('ls-files', '--cached', '--others', '--exclude-standard', '--deduplicate', '-z')) {
+    $startInfo.ArgumentList.Add($argument)
+  }
+  $buffer = [System.IO.MemoryStream]::new()
+  $process = [System.Diagnostics.Process]::Start($startInfo)
+  try {
+    # Lire les octets de Git sans décodage console ni découpage par lignes.
+    $output = $process.StandardOutput.BaseStream.CopyToAsync($buffer)
+    $errors = $process.StandardError.BaseStream.CopyToAsync([System.IO.Stream]::Null)
+    $process.WaitForExit()
+    $output.GetAwaiter().GetResult()
+    $errors.GetAwaiter().GetResult()
+    if ($process.ExitCode -ne 0) { Fail 'Inventaire Git impossible.' }
+    return $utf8.GetString($buffer.ToArray()).Split([char]0, [System.StringSplitOptions]::RemoveEmptyEntries)
+  } finally {
+    $process.Dispose()
+    $buffer.Dispose()
+  }
+}
+
 try {
   $root = (Resolve-Path -LiteralPath $Path).Path
   $core = Join-Path $root 'NOYAU.md'
@@ -73,27 +99,26 @@ try {
   foreach ($heading in $requiredHeadings) {
     if (@($headings -ceq $heading).Count -ne 1) { Fail "Section de référence absente ou dupliquée : $heading." }
   }
-  $integrations = Join-Path $root 'integrations'
-  $requiredAdapters = @('opencode.md', 'harness-dsh.md', 'codex.md', 'claude-code.md', 'generic.md')
+  $pathComparer = if ($IsWindows) { [System.StringComparer]::OrdinalIgnoreCase } else { [System.StringComparer]::Ordinal }
+  $requiredAdapters = [System.Collections.Generic.HashSet[string]]::new(
+    [string[]]@('opencode.md', 'harness-dsh.md', 'codex.md', 'claude-code.md', 'generic.md'), $pathComparer
+  )
   foreach ($name in $requiredAdapters) {
-    $adapter = Join-Path $integrations $name
+    $adapter = Join-Path $root "integrations/$name"
     if (-not (Test-Path -LiteralPath $adapter -PathType Leaf)) { Fail "Adaptateur manquant : integrations/$name." }
     Test-Adapter (Read-Utf8 $adapter) $name
   }
   # Fichiers suivis et nouveaux non ignorés ; ne pas parcourir les données privées.
   $git = @(Get-Command git,git.exe -CommandType Application -ErrorAction SilentlyContinue)[0]
   if (-not $git) { Fail 'Git requis pour établir le périmètre des contrôles.' }
-  $paths = @(& $git.Source -C $root ls-files --cached --others --exclude-standard --deduplicate -z 2>$null)
-  if ($LASTEXITCODE -ne 0) { Fail 'Inventaire Git impossible.' }
-  $files = foreach ($relative in (($paths -join "`n") -split [char]0)) {
-    if ([string]::IsNullOrEmpty($relative)) { continue }
+  foreach ($relative in (Get-GitPaths $git.Source $root)) {
     $fullPath = Join-Path $root $relative
-    if (Test-Path -LiteralPath $fullPath -PathType Leaf) { Get-Item -LiteralPath $fullPath -Force }
-  }
-  foreach ($file in $files) {
+    if (-not (Test-Path -LiteralPath $fullPath -PathType Leaf)) { continue }
+    $file = Get-Item -LiteralPath $fullPath -Force
     if ($file.Extension -in @('.md', '.ps1', '.mjs', '.yml', '.bat')) {
       $content = Read-Utf8 $file.FullName
-      if ($file.Extension -eq '.md' -and $file.DirectoryName -ceq $integrations -and $file.Name -cnotin $requiredAdapters) {
+      if ($file.Extension -eq '.md' -and $pathComparer.Equals([System.IO.Path]::GetDirectoryName($relative), 'integrations') -and
+          -not $requiredAdapters.Contains($file.Name)) {
         Test-Adapter $content $file.Name
       }
     }
