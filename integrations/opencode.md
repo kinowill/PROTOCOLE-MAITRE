@@ -1,26 +1,54 @@
 # Adaptateur — OpenCode 2
 
-Documentation officielle consultée le 12/11/2026 : [instructions](https://opencode.ai/docs/instructions/), [skills](https://opencode.ai/docs/skills/), [permissions](https://opencode.ai/docs/permissions/), [policies](https://opencode.ai/docs/policies/), [CLI](https://opencode.ai/docs/cli/commands/), [compaction](https://opencode.ai/docs/compaction/), [cache](https://opencode.ai/docs/models/#prompt-caching) et [warming](https://opencode.ai/docs/warming/). Documentation évolutive : relever aussi la version installée ; OpenCode 1 et 2 diffèrent.
+Instructions et configuration revues le 25/11/2026. Relever la version du
+client, le workspace et, le cas échéant, le service auquel il est connecté.
+[Instructions V2](https://opencode.ai/docs/instructions/) · [Configuration](https://opencode.ai/docs/config/) · [Migration depuis V1](https://opencode.ai/docs/migrate-v1/)
+
+Autres surfaces documentées le 12/11/2026.
+[Skills](https://opencode.ai/docs/skills/) · [Permissions](https://opencode.ai/docs/permissions/) · [Policies](https://opencode.ai/docs/policies/) · [CLI](https://opencode.ai/docs/cli/commands/) · [Compaction](https://opencode.ai/docs/compaction/) · [Cache](https://opencode.ai/docs/models/#prompt-caching) · [Warming](https://opencode.ai/docs/warming/)
 
 ## Installation native
 
-- Global : `~/.config/opencode/AGENTS.md`. Préserver les consignes existantes et ajouter le noyau intégral une seule fois. V2 reconnaît `AGENTS.md`, sans solution de repli `CLAUDE.md`.
-- Projet : `AGENTS.md` pour les spécificités locales. Les fichiers globaux, ceux du workspace et des ancêtres puis ceux du tableau `instructions` sont combinés. Les conflits de texte ne sont pas résolus automatiquement. Des fichiers descendants peuvent s'ajouter pendant l'exploration.
-- Examiner les chemins de configuration alternatifs et les sources effectives avant de choisir la cible globale. XDG et `OPENCODE_CONFIG_DIR` peuvent déplacer la configuration.
-- Conserver `PROTOCOLE.md` localement à une révision identifiée. Ne pas ajouter la référence complète à `instructions` si elle doit rester à la demande.
+- Le chemin global habituel est `~/.config/opencode/AGENTS.md`. Vérifier la
+  configuration du serveur réellement utilisé et les dossiers alternatifs,
+  par exemple `OPENCODE_CONFIG_DIR`. Préserver les consignes et ajouter le
+  noyau intégral une seule fois dans une surface globale ou projet
+  effectivement chargée selon la portée autorisée.
+  [Contrat d'installation](../README.md#installation-manuelle)
+- V2 combine le global et la chaîne du workspace vers ses ancêtres. La
+  découverte s'arrête au dossier utilisateur. Pour un workspace hors du
+  dossier utilisateur, elle s'arrête à la racine du projet. Le guide actuel décrit un repli
+  `CLAUDE.md` par répertoire en l'absence d'`AGENTS.md` et le repli global
+  `~/.claude/CLAUDE.md`. Vérifier l'effet de
+  `OPENCODE_DISABLE_CLAUDE_CODE_PROMPT`, `OPENCODE_DISABLE_CLAUDE_CODE` et
+  `OPENCODE_DISABLE_PROJECT_CONFIG` s'ils sont présents dans l'environnement
+  du serveur. [Portée, repli et découverte](https://opencode.ai/docs/instructions/)
+- Les entrées `instructions` de la configuration effective s'ajoutent aux
+  sources de la chaîne. Elles peuvent viser des fichiers locaux, des motifs
+  ou des URL. OpenCode assemble les textes et laisse les conflits à résoudre.
+  Les fichiers descendants pertinents peuvent s'ajouter lors de la lecture
+  d'une zone. Les mises à jour des fichiers ambiants et celles des fichiers
+  découverts en descendant suivent des règles différentes.
+  [Assemblage et mises à jour](https://opencode.ai/docs/instructions/#ordering)
+- Conserver `PROTOCOLE.md` et cet adaptateur à la même révision pour lecture à la
+  demande, par exemple dans la skill. Une entrée `instructions` à ce fichier
+  en ferait une instruction additionnelle du client.
 - Sauvegarder les fichiers d'installation puis fusionner : aucune réécriture globale de la configuration n'est nécessaire. Préserver les providers, modèles, clés, sessions et réglages de cache/compaction.
-- Vérifier `tools/install-check.ps1 -Target <cible>`, puis SM-01 en session vierge. Le contrôle statique ne prouve ni le chargement ni l'obéissance du modèle.
+- Vérifier `tools/install-check.ps1 -Target <cible>` pour l'intégrité du fichier.
+  Relever les sources observables dans le workspace visé, puis effectuer SM-01
+  en session vierge avant toute lecture manuelle du témoin.
 
 ## Skill de référence
 
-En dehors du bloc intégral du noyau, inclure ce repère de chargement dans les
-instructions globales lors de l'installation, sans résumer ni remplacer le noyau :
+En dehors du bloc intégral du noyau, inclure ce repère de chargement dans la
+surface d'installation autorisée. Le bloc intégral porte les règles permanentes.
 
 > Avant de conclure à un blocage, ou pour préciser une règle de sécurité,
 > qualité, communication, validation ou reprise, charger le skill `protocole-maitre` et lire
 > la section utile de sa référence locale. Le noyau reste prioritaire.
 
-Le dossier `skills/protocole-maitre/` du dépôt est un modèle d'installation :
+Le dossier `skills/protocole-maitre/` du dépôt est un modèle d'installation.
+Pour une installation globale autorisée, procéder ainsi.
 
 1. Copier son `SKILL.md` dans `~/.config/opencode/skills/protocole-maitre/`.
 2. Copier le `PROTOCOLE.md` de la même révision dans `references/PROTOCOLE.md`, sous ce dossier de skill.
