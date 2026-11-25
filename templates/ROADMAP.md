@@ -1,10 +1,10 @@
 ﻿# Roadmap — <NOM DU PROJET>
 
-> Une ligne par chantier. Mise à jour à chaque session qui change quelque chose.
+> Mettre à jour dans la même session si l'état du travail change.
 
 ## En cours
 
-- [ ] …
+- [ ] … (résultat attendu, comportements à préserver, contrôles et environnement)
 
 ## À faire (2-3 prochaines tâches)
 

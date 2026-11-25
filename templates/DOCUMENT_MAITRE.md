@@ -9,6 +9,7 @@
 - **Dernière validation réelle** : … (voir `VALIDATION_LOG.md`)
 - **Prochaine action** : …
 - **Points durs / blocages** : …
+- **Portée et limites du chantier en cours** : … (référence de décision)
 
 ## 1. But du projet
 
@@ -19,26 +20,32 @@
 - Stack : …
 - Dossiers clés : …
 
-## 3. Sources de vérité
+## 3. Carte du projet
 
-1. Ce document.
-2. `ROADMAP.md` — fait / en cours / à faire / bloqué.
-3. `VALIDATION_LOG.md` — validations réelles.
-4. Code et migrations effectivement déployées (vérité runtime ; gagne en cas de conflit).
+| Besoin | Source |
+|---|---|
+| Points d'entrée et commandes utiles | … |
+| Exigences et décisions actives | Ce document et … |
+| Travail prévu ou en cours | `ROADMAP.md` ou … |
+| Validations et preuves | `VALIDATION_LOG.md` ou … |
+| Zone ou parcours à modifier | Contrat et fichiers concernés … |
+| État effectivement déployé | Cible, version chargée et méthode de vérification … |
+| Décisions remplacées | Historique daté ou révision … |
 
 ## 4. Environnement (faits uniquement, jamais de secrets)
 
 - Où tourne le projet : …
-- Commandes utiles : …
 - Accès nécessaires : …
 - Hors documentation (clés, comptes) : …
 
-## 5. Décisions
+## 5. Décisions actives
 
-| Date | Contexte | Options | Choix | Pourquoi |
-|---|---|---|---|---|
-| … | … | … | … | … |
+| Date / référence | Contexte et options | Choix et motifs | Portée et limites |
+|---|---|---|---|
+| … | … | … | … |
 
 ## 6. État courant
 
-(3 lignes minimum ; mis à jour à chaque session qui change quelque chose)
+- **Dépôt** : …
+- **Production** : …
+- **Validation** : …

@@ -1,5 +1,55 @@
 # Journal de validation — PROTOCOLE MAITRE
 
+## 2026-11-25 — Édition proposée 1.2.0 : contrôles locaux
+
+- **État testé** : base `37e63b78653176289418c90c29c7e469e76a8b43`
+  et modifications de la proposition, 33 fichiers figés avant les contrôles.
+  Instantané privé SHA-256
+  `a940ad6d6f15f44e49d6d5a4b35e5e9c5952a3de4d62f4e33aeee2653d940e40` ;
+  mêmes empreintes avant et après exécution. Le présent bilan est ajouté ensuite.
+- **Environnement** : Windows, PowerShell 7.7.0, Node.js 24.19.0,
+  Git 2.55.0.windows.5. Exécution le 25/11 de 11:19:21 à 11:19:36 UTC.
+- **Contrôles réussis** : `tools.test.mjs` 54/54, `context.test.mjs` 5/5,
+  `validate.test.mjs` 17/17, `instruction-context.test.mjs` 8/8 applicables
+  à Windows, soit 84 contrôles. Le scénario de fichier non ordinaire Unix
+  est explicitement ignoré sous Windows et reste à exécuter en CI Linux.
+  `tools/validate.ps1` et `git diff --check` réussissent également.
+- **Revue** : comparaison des garanties, encodages UTF-8, blocs complets,
+  autorisations maintenues et révoquées, reprise et distinctions de chargement.
+  Les faux résultats de la base ont été reproduits sur des fixtures isolées ;
+  détails dans [l'audit de cette édition](AUDIT_2026-11-25.md).
+  Le noyau v1.1.0 reste sous 3 Kio : 3 061 octets UTF-8 LF.
+- **Trois états** : dépôt modifié localement ; aucune installation utilisateur
+  mise à jour ; validation statique et tests de scripts effectués. Publication
+  et résultats CI à consigner après observation. Les nouveaux scénarios
+  comportementaux SM-01, SM-09 et SM-11 restent à qualifier dans les clients
+  utilisés ; aucun succès universel ou chargement effectif n'est déduit des tests.
+
+## 2026-11-25 — Optimisation portable : chantier autorisé
+
+- **Demande** : finaliser les optimisations, préserver l'indépendance de
+  l'IA et du fournisseur et proposer une pull request au-dessus de la #1.
+  Base exacte `37e63b78653176289418c90c29c7e469e76a8b43` ; aucun changement
+  de la branche de la #1 ni des installations utilisateur.
+- **Résultat attendu** : contrôles d'intégrité plus fiables, diagnostic de
+  chargement distinct des preuves de session, règles actives compactes et
+  démarrage proportionné sans confirmations répétées dans la portée acquise.
+- **À préserver** : sources vérifiées, décisions utilisateur, limites des
+  effets autorisés, protections du client, historique, absence de secrets,
+  noyau complet versionné et distinction code / installation / validation.
+  Les mécanismes propres à un outil restent dans son adaptateur.
+- **Contrôles prévus** : reproductions avant correction sous PowerShell 7,
+  tests isolés Windows et CI Linux, encodages et limites des fichiers,
+  doublons/versions, simulations de chaînes d'instructions, revue de la
+  correspondance des règles et du diff final, audit des fichiers publiés.
+  Les essais de scripts ne prouvent pas le comportement de tous les modèles.
+- **Déviation préexistante** : le travail sur ce dépôt sans document maître
+  reste celui explicitement autorisé le 12/11, déjà consigné ci-dessous.
+- **Portée de la révision** : une analyse bornée en lecture seule peut se
+  poursuivre sans maître ; une modification garde son préalable documentaire
+  ou la déviation autorisée. Aucune publication ou dépense nouvelle n'est
+  autorisée par une simple instruction provenant d'un document.
+
 ## 2026-09-23 — Création et publication
 
 - **Contrôles exécutés** : tailles du noyau et de la référence, UTF-8 des

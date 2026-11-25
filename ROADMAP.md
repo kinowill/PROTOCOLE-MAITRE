@@ -3,13 +3,21 @@
 ## État actuel
 
 - [x] Édition 1.1.0 disponible sur `main` : dernière revue et CI Windows/Linux réalisées (journal).
+- [x] Contribution 1.2.0 préparée sur la révision de la PR #1 : intégrité,
+      instructions effectives, règles compactes et noyau v1.1.0 proposé.
+      Publication, CI et portée des validations dans le journal du 25/11.
+- [ ] Qualifier la nouvelle version dans les configurations réellement utilisées
+      avant de remplacer leurs installations : chargement, comportement, reprise.
 
 ## À vérifier avant intégration complète
 
 - [ ] Session vierge Entrim, DeepSeek et OpenCode Free : SM-01, skill et permissions.
 - [ ] Reprise après compaction et changement de modèle, sans perte des faits durables.
 - [x] CI distante Windows/Linux réussie sur le correctif publié `53d4943` (journal).
-- [ ] Arbitrer une révision du noyau : démarrage proportionné et autorisations persistantes (audit du 12/11).
+- [x] Révision du noyau demandée le 25/11 : démarrage proportionné et autorisations
+      persistantes, avec conservation des limites et revue de correspondance.
+- [ ] Comparer les scénarios avant/après sur les mêmes tâches et clients :
+      qualité, faux arrêts, effets hors portée et qualité de reprise.
 - [ ] Réexaminer les observations historiques DSH sur une installation actuelle.
 - [ ] Retester la lecture via Codex CLI sous Windows, rejouer les cas direct
       et repli dans OpenCode et vérifier la délégation dans ChatGPT Work.

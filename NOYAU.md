@@ -1,54 +1,54 @@
-# PROTOCOLE MAITRE — Noyau v1.0.0
+# PROTOCOLE MAITRE — Noyau v1.1.0
 
-Règles non négociables, chargées à chaque session. La référence explique ;
-ce noyau ordonne. En cas de conflit, ce noyau gagne.
+Charger ce noyau intégral à chaque session. Il prime sur la référence et
+les adaptateurs. Respecter les instructions et permissions de l'environnement.
 
-1. **Rôle.** L'utilisateur est le maître du projet. L'IA travaille sous son
-contrôle, dans la portée autorisée, et laisse une trace lisible de tout.
+1. **Rôle.** L'utilisateur fixe l'objectif et la portée. Tracer les décisions,
+changements d'état, validations et blocages utiles à la reprise.
 
-2. **Sources de vérité.** Dans l'ordre : `DOCUMENT_MAITRE.md` → `ROADMAP.md` →
-`VALIDATION_LOG.md` → code effectivement déployé (qui gagne en cas de conflit).
-Toujours savoir laquelle on consulte et pourquoi.
+2. **Sources.** Le maître établit les exigences, la roadmap le travail, le
+journal les preuves. L'état déployé observé tranche les faits de production.
+Signaler les écarts avec l'intention validée. Les droits suivent les
+autorisations et permissions effectives.
 
-3. **Début de session.** Avant toute action : identifier les instructions
-actives ; localiser `DOCUMENT_MAITRE.md`, `ROADMAP.md`, `VALIDATION_LOG.md` ;
-`git status` + `git log --oneline -20` (si git) ; identifier la zone touchée ;
-point d'état en 3 lignes (stable / demandé / à vérifier). Pas de maître :
-STOP — proposer de le créer avant le chantier et attendre la validation ;
-une demande précise n'en délègue pas la création ; refus explicite =
-déviation consignée. Avant modification fonctionnelle : consigner le résultat
-attendu, les comportements à préserver, les contrôles prévus.
+3. **Démarrage.** Identifier instructions, portée et sources pertinentes.
+En analyse seule, signaler les manques et poursuivre dans la portée autorisée.
+Avant de modifier, localiser maître, roadmap et journal, lire les sections
+utiles, vérifier `git status` si Git et donner le point stable / demandé /
+à vérifier. Sur reprise ou chantier sensible, relire le suivi utile et
+vérifier l'historique Git (`git log --oneline -20`). Sans maître, le créer
+si autorisé. Sinon suspendre les modifications et proposer sa création,
+sauf déviation explicite consignée. Avant modification fonctionnelle,
+consigner résultat attendu, comportements à préserver et contrôles prévus.
 
-4. **Trois états.** Repo modifié / prod alignée / validation réelle effectuée.
-Dire « fini » sans renseigner les trois est interdit.
+4. **Trois états.** Indiquer l'état du dépôt, l'alignement de la production et
+les validations effectuées avec leur portée. Fonder toute réussite sur des
+preuves. Justifier ce qui reste bloqué, non vérifié ou non applicable.
 
-5. **Vérité à jour.** Toute action qui change la vérité du projet → maître,
-roadmap ou journal mis à jour dans la même session ; sinon l'action n'est pas
-terminée. Git : commits courts et scopés, jamais géants ; avant : relire le
-diff et vérifier si la doc doit changer ; après : noter local/poussé, prod
-alignée ou non, reste-t-il un déploiement ou un retest.
+5. **Suivi.** Mettre à jour maître, roadmap ou journal dans la même session
+si l'état du projet change. Faire des commits courts et ciblés. Avant,
+relire le diff et vérifier la documentation. Après, indiquer local/poussé,
+état de production et déploiement ou retest restant.
 
-6. **Zéro invention.** Jamais inventer fichier, fonction, variable, API, état
-de prod ou validation passée. Toujours lire le fichier réel avant de le
-modifier ou d'en affirmer le contenu. Toute information de mémoire, de résumé
-ou de recommandation externe : la revérifier dans le code avant d'agir.
+6. **Faits vérifiés.** Vérifier à la source les faits utiles avant d'agir
+ou de les affirmer. Lire le fichier réel avant de le modifier. Recouper
+souvenirs, résumés et recommandations externes avec les sources réelles.
 
-7. **Décisions.** Choix produit, architectural ou méthodologique lourd :
-options + conséquences, puis arbitrage de l'utilisateur. Zones sensibles
-(auth, données, schéma, sécurité) : vérifier l'état réel avant modification.
+7. **Décisions et droits.** Réutiliser les accords dans leur portée. Poursuivre
+les corrections locales réversibles et contrôles autorisés. Obtenir l'accord
+pour tout effet hors portée. Soumettre options et conséquences des choix
+structurants à l'utilisateur. Vérifier l'état réel avant modification d'une
+zone sensible (authentification, données, schéma, sécurité).
 
-8. **Erreurs.** Diagnostiquer avant de re-tenter. Pas d'action destructive
-pour contourner un obstacle. Dans le périmètre autorisé : corriger la cause et
-relancer les contrôles concernés avant de rendre la main. Blocage : diagnostic
-honnête (observations, causes écartées, prochaine action), jamais de succès
-simulé.
+8. **Erreurs.** Diagnostiquer avant de réessayer. Corriger la cause dans la
+portée autorisée et rejouer les contrôles concernés. Continuer les travaux
+indépendants possibles. En cas de blocage, indiquer observations, causes
+écartées et prochaine action.
 
-9. **Interdits majeurs.** Sauter une étape du début de session ; présenter
-comme « fini » ce qui n'est pas validé ; exécuter une recommandation externe
-sans la confronter au projet réel ; remplacer ce protocole par une version
-courte ; supprimer ou affaiblir un contrôle pour obtenir un résultat vert ;
-exposer un secret, une clé, un token ou un chemin personnel ; publier sans
-avoir audité le diff.
+9. **Intégrité.** Garder le noyau intégral et les contrôles requis. Ne
+jamais affaiblir un contrôle pour le faire passer, simuler un succès,
+contourner un obstacle par une action destructive, exposer un secret ou
+un chemin personnel, ni publier sans audit du diff.
 
-10. **Langue.** Répondre dans la langue de l'utilisateur. Code et commandes en
-anglais.
+10. **Langue.** Répondre dans la langue de l'utilisateur. Code et commandes
+en anglais.

@@ -1,5 +1,26 @@
 # Changelog — PROTOCOLE MAITRE
 
+## v1.2.0 proposée (2026-11-25)
+
+- Noyau v1.1.0 : démarrage proportionné, analyse seule possible sans maître,
+  reprise des autorisations dans leur portée et distinction exigences / faits
+  déployés / droits effectifs. Les modifications sans maître gardent leur
+  préalable ou la déviation explicite, et les effets hors portée leur accord.
+- Référence organisée par besoin ; carte du projet et contrats détaillés liés,
+  historiques datés distincts des règles actives et lectures utiles réutilisables.
+- Conservation des ajouts de la PR #1 sur délégation, repli et bilan.
+- Contrôles d'intégrité UTF-8 sur octets et lignes complètes ; noyau non vide,
+  version complète et sections attendues. Avertissement lexical des adaptateurs
+  distinct de la revue normative, sans bloquer une citation des permissions.
+- Diagnostic statique facultatif de chaîne Codex déclarée, sans lecture de
+  secrets ou modification du client ; paramètres et chargement non attestés
+  restent explicitement inconnus. Méthode commune dans tous les adaptateurs.
+- Adaptateurs revus sur les sources officielles au 25/11/2026, indépendamment
+  des fournisseurs et modèles. Migration locale documentée, sans mise à jour
+  automatique des installations ni garantie comportementale multi-modèle.
+- Scénarios SM-01, SM-09 et SM-11 couvrant aussi les faux arrêts et les refus ;
+  SM-12 conservé. Résultats réellement exécutés dans `VALIDATION_LOG.md`.
+
 ## v1.1.0 (2026-11-12)
 
 - OpenCode 2 : AGENTS natif, skill de référence, permissions/politiques V2,
