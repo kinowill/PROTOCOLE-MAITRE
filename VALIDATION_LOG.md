@@ -1,5 +1,25 @@
 # Journal de validation — PROTOCOLE MAITRE
 
+## 2026-11-25 — Correctif publié : Windows et Linux validés
+
+- **Révision vérifiée** : `33b45de0e557e6103b79b71e3fe222785348508c`,
+  sur la [PR #2](https://github.com/kinowill/PROTOCOLE-MAITRE/pull/2).
+  Les deux systèmes réussissent le
+  [contrôle de branche](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/45605420668)
+  et le [contrôle de pull request](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/45605429123).
+- **Résultats lus dans les journaux distants** : 54 contrôles d'outils,
+  5 de suivi du contexte et 19 du validateur réussis sur chaque système.
+  Diagnostic : 8 réussis sous Windows, scénario Unix seul ignoré ; 9 réussis
+  sous Linux, aucun ignoré. Total applicable : 86 Windows, 87 Linux.
+  Structure, syntaxe et audit des fichiers suivis réussis dans les deux cas.
+- **Trois états** : changements publiés dans la PR, sans fusion ; installations
+  utilisateur inchangées ; scripts validés sur les deux systèmes. Le noyau
+  proposé et le comportement réel des clients restent à qualifier avant leur
+  installation. Les échecs initiaux sont conservés ci-dessous.
+- **Clôture documentaire** : cette entrée et la roadmap enregistrent les
+  résultats observés après le correctif, sans changer son code. Les contrôles
+  attachés à la PR indiquent aussi l'état de sa dernière révision documentaire.
+
 ## 2026-11-25 — Correction du contrôle des chemins Git
 
 - **Reproduction** : sous PowerShell 7.6.10, le nouvel adaptateur est présent

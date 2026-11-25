@@ -3,9 +3,10 @@
 ## État actuel
 
 - [x] Édition 1.1.0 disponible sur `main` : dernière revue et CI Windows/Linux réalisées (journal).
-- [x] Contribution 1.2.0 préparée sur la révision de la PR #1 : intégrité,
+- [x] Contribution 1.2.0 publiée dans la [PR #2](https://github.com/kinowill/PROTOCOLE-MAITRE/pull/2),
+      sur la révision de la PR #1 : intégrité,
       instructions effectives, règles compactes et noyau v1.1.0 proposé.
-      Publication, CI et portée des validations dans le journal du 25/11.
+      CI Windows/Linux réussie sur `33b45de`, preuves et limites dans le journal.
 - [ ] Qualifier la nouvelle version dans les configurations réellement utilisées
       avant de remplacer leurs installations : chargement, comportement, reprise.
 
