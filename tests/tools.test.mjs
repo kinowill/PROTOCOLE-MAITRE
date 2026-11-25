@@ -1,4 +1,5 @@
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join, resolve, sep } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -76,11 +77,25 @@ try {
   finally { rmSync(notRepo, { recursive: true, force: true }); }
   expect(scan(join(tmp, 'missing')).status === 2, 'missing scan directory fails closed');
   const target = join(tmp, 'AGENTS [test].md');
-  const source = readFileSync(join(repo, 'NOYAU.md'), 'utf8');
+  const sourcePath = join(repo, 'NOYAU.md');
+  const source = readFileSync(sourcePath, 'utf8');
   writeFileSync(target, 'Local instructions\n\n' + source + '\n');
   const valid = verify(target);
   expect(valid.status === 0, 'complete kernel with local instructions');
+  const report = valid.status === 0 && JSON.parse(valid.stdout.slice(0, valid.stdout.indexOf('}') + 1));
+  expect(report.statut === 'OK_STATIQUE' && report.chargement_session === 'NON_VERIFIE' && report.occurrences === 1, 'static report preserves status and session distinction');
+  const sha256 = (path) => createHash('sha256').update(readFileSync(path)).digest('hex').toUpperCase();
+  expect(report.source_sha256 === sha256(sourcePath) && report.target_sha256 === sha256(target), 'report hashes correspond to raw source and target bytes');
   expect(!(valid.stdout + valid.stderr).includes(tmp) && !valid.stdout.includes('"source":') && !valid.stdout.includes('"target":'), 'no absolute personal paths in report');
+  const sourceWithoutFinalNewlines = source.replace(/(?:\r?\n)+$/, '');
+  writeFileSync(target, 'Local instructions\n\n' + sourceWithoutFinalNewlines + '\nOther local instructions');
+  expect(verify(target).status === 0, 'local instructions on either side accepted');
+  writeFileSync(target, sourceWithoutFinalNewlines);
+  expect(verify(target).status === 0, 'kernel ending at EOF accepted');
+  writeFileSync(target, sourceWithoutFinalNewlines + ' additional instructions\n');
+  expect(verify(target).status === 1, 'suffix on kernel final line rejected');
+  writeFileSync(target, sourceWithoutFinalNewlines + ' \n');
+  expect(verify(target).status === 1, 'trailing space on kernel final line rejected');
   writeFileSync(target, source + '\n' + source);
   expect(verify(target).status === 1, 'duplicate kernel rejected');
   writeFileSync(target, source.slice(0, 100));
@@ -101,8 +116,24 @@ try {
   expect(verify(target).status === 0, 'CRLF/LF equivalents accepted');
   writeFileSync(target, '\uFEFF' + source);
   expect(verify(target).status === 0, 'UTF-8 BOM accepted');
+  const utf16 = Buffer.concat([Buffer.from([0xff, 0xfe]), Buffer.from(source, 'utf16le')]);
+  writeFileSync(target, utf16);
+  expect(verify(target).status === 1, 'UTF-16 BOM target rejected');
+  writeFileSync(target, Buffer.concat([Buffer.from(source), Buffer.from([0xff])]));
+  const encodingError = verify(target);
+  expect(encodingError.status === 1 && !(encodingError.stdout + encodingError.stderr).includes(tmp), 'invalid UTF-8 target fails without exposing path');
+  // Keep the UTF-16 source below the kernel budget to exercise decoding.
+  const compactKernel = source.split(/\r?\n/, 1)[0] + '\n\nRègle locale.\n';
+  writeFileSync(sourcePatch, Buffer.concat([Buffer.from([0xff, 0xfe]), Buffer.from(compactKernel, 'utf16le')]));
+  writeFileSync(target, compactKernel);
+  expect(verify(target, sourcePatch).status === 1, 'UTF-16 BOM source rejected within byte budget');
+  writeFileSync(sourcePatch, '\uFEFF' + compactKernel);
+  expect(verify(target, sourcePatch).status === 0, 'UTF-8 BOM source accepted within byte budget');
   writeFileSync(target, source.replace('1. **', '1.  **'));
   expect(verify(target).status === 1, 'kernel content edits rejected');
+  writeFileSync(sourcePatch, source.split(/\r?\n/, 1)[0] + '\n');
+  writeFileSync(target, readFileSync(sourcePatch));
+  expect(verify(target, sourcePatch).status === 1, 'source header without kernel body rejected');
   writeFileSync(sourcePatch, '');
   expect(verify(target, sourcePatch).status === 1, 'empty source rejected');
   writeFileSync(sourcePatch, source + 'x'.repeat(3072)); writeFileSync(target, readFileSync(sourcePatch));
