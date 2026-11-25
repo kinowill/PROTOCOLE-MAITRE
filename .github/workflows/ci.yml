@@ -36,5 +36,7 @@ jobs:
         run: node tests/context.test.mjs
       - name: Tests des fins de ligne et du périmètre de validation
         run: node tests/validate.test.mjs
+      - name: Diagnostic statique des instructions déclarées
+        run: node --test tests/instruction-context.test.mjs
       - name: Audit des fichiers suivis sans exclusions
         run: ./tools/pre-push-audit.ps1

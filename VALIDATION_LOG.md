@@ -1,5 +1,114 @@
 # Journal de validation — PROTOCOLE MAITRE
 
+## 2026-11-25 — Correctif publié : Windows et Linux validés
+
+- **Révision vérifiée** : `33b45de0e557e6103b79b71e3fe222785348508c`,
+  sur la [PR #2](https://github.com/kinowill/PROTOCOLE-MAITRE/pull/2).
+  Les deux systèmes réussissent le
+  [contrôle de branche](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/45605420668)
+  et le [contrôle de pull request](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/45605429123).
+- **Résultats lus dans les journaux distants** : 54 contrôles d'outils,
+  5 de suivi du contexte et 19 du validateur réussis sur chaque système.
+  Diagnostic : 8 réussis sous Windows, scénario Unix seul ignoré ; 9 réussis
+  sous Linux, aucun ignoré. Total applicable : 86 Windows, 87 Linux.
+  Structure, syntaxe et audit des fichiers suivis réussis dans les deux cas.
+- **Trois états** : changements publiés dans la PR, sans fusion ; installations
+  utilisateur inchangées ; scripts validés sur les deux systèmes. Le noyau
+  proposé et le comportement réel des clients restent à qualifier avant leur
+  installation. Les échecs initiaux sont conservés ci-dessous.
+- **Clôture documentaire** : cette entrée et la roadmap enregistrent les
+  résultats observés après le correctif, sans changer son code. Les contrôles
+  attachés à la PR indiquent aussi l'état de sa dernière révision documentaire.
+
+## 2026-11-25 — Correction du contrôle des chemins Git
+
+- **Reproduction** : sous PowerShell 7.6.10, le nouvel adaptateur est présent
+  dans `git ls-files`, mais une variation de casse du répertoire Windows
+  reproduit la sortie 0 incorrecte. C'est une reproduction équivalente ;
+  la normalisation exacte du chemin du runner distant n'est pas observée.
+  Autre défaut reproduit : un fichier Unicode invalide est contrôlé sous
+  console UTF-8 et manqué sous console Latin1.
+- **Correction** : flux Git lu en octets, UTF-8 strict et séparation NUL ;
+  classement à partir des chemins relatifs Git, comparaison ordinale
+  insensible à la casse sous Windows et exacte sous Linux. Options de
+  l'inventaire et exclusions privées conservées. Les fixtures isolent leurs
+  exclusions Git et vérifient aussi le cas Unicode valide sous console Latin1.
+- **Vérifications locales** : les 19 contrôles ciblés passent avec
+  PowerShell 7.6.10 et 7.7.0. Rejeu indépendant sur 7.6.10 réussi ; validation
+  statique et contrôle du diff réussis. Revue indépendante du diff sans point
+  bloquant. Aucun test retiré ni attente abaissée. Le rejeu distant reste à
+  observer avant de déclarer les deux systèmes validés.
+
+## 2026-11-25 — Publication de la proposition et premier contrôle distant
+
+- [PR #2](https://github.com/kinowill/PROTOCOLE-MAITRE/pull/2) ouverte
+  au-dessus de la #1, base `docs/delegation-review`. Commits
+  `406d91b`, `f7aa05a` et `af82858` publiés après audit du diff, de l'index
+  et de la copie de travail, nouveaux fichiers inclus. Auteur et auteur
+  du commit vérifiés : VIA Motoculture. La #1 reste à `37e63b7`.
+- [Premier passage CI](https://github.com/kinowill/PROTOCOLE-MAITRE/actions/runs/45604366705)
+  sur `af82858753982b01c0eb23e0772cf4e646145c82` : Linux réussi, y compris
+  les neuf scénarios du diagnostic et le cas de fichier non ordinaire.
+  Windows échoue sur l'adaptateur nouveau non ignoré, après les douze
+  premiers contrôles de `validate.test.mjs` : sortie 0 au lieu de 1.
+  Cet échec distant n'est pas assimilé au succès local précédent.
+- **Environnement distant observé** : Node.js 22.23.5, PowerShell 7.6.10,
+  Git 2.56.1 sous Linux et 2.56.1.windows.1 sous Windows.
+- **Correction attendue** : rétablir la validation des nouveaux adaptateurs
+  dans l'environnement Windows concerné, préserver le périmètre Git et
+  les exclusions privées, puis rejouer les contrôles concernés et les deux
+  systèmes en CI. Aucun contrôle retiré ni installation utilisateur modifiée.
+
+## 2026-11-25 — Édition proposée 1.2.0 : contrôles locaux
+
+- **État testé** : base `37e63b78653176289418c90c29c7e469e76a8b43`
+  et modifications de la proposition, 33 fichiers figés avant les contrôles.
+  Instantané privé SHA-256
+  `a940ad6d6f15f44e49d6d5a4b35e5e9c5952a3de4d62f4e33aeee2653d940e40` ;
+  mêmes empreintes avant et après exécution. Le présent bilan est ajouté ensuite.
+- **Environnement** : Windows, PowerShell 7.7.0, Node.js 24.19.0,
+  Git 2.55.0.windows.5. Exécution le 25/11 de 11:19:21 à 11:19:36 UTC.
+- **Contrôles réussis** : `tools.test.mjs` 54/54, `context.test.mjs` 5/5,
+  `validate.test.mjs` 17/17, `instruction-context.test.mjs` 8/8 applicables
+  à Windows, soit 84 contrôles. Le scénario de fichier non ordinaire Unix
+  est explicitement ignoré sous Windows et reste à exécuter en CI Linux.
+  `tools/validate.ps1` et `git diff --check` réussissent également.
+- **Revue** : comparaison des garanties, encodages UTF-8, blocs complets,
+  autorisations maintenues et révoquées, reprise et distinctions de chargement.
+  Les faux résultats de la base ont été reproduits sur des fixtures isolées ;
+  détails dans [l'audit de cette édition](AUDIT_2026-11-25.md).
+  Le noyau v1.1.0 reste sous 3 Kio : 3 061 octets UTF-8 LF.
+- **Trois états** : dépôt modifié localement ; aucune installation utilisateur
+  mise à jour ; validation statique et tests de scripts effectués. Publication
+  et résultats CI à consigner après observation. Les nouveaux scénarios
+  comportementaux SM-01, SM-09 et SM-11 restent à qualifier dans les clients
+  utilisés ; aucun succès universel ou chargement effectif n'est déduit des tests.
+
+## 2026-11-25 — Optimisation portable : chantier autorisé
+
+- **Demande** : finaliser les optimisations, préserver l'indépendance de
+  l'IA et du fournisseur et proposer une pull request au-dessus de la #1.
+  Base exacte `37e63b78653176289418c90c29c7e469e76a8b43` ; aucun changement
+  de la branche de la #1 ni des installations utilisateur.
+- **Résultat attendu** : contrôles d'intégrité plus fiables, diagnostic de
+  chargement distinct des preuves de session, règles actives compactes et
+  démarrage proportionné sans confirmations répétées dans la portée acquise.
+- **À préserver** : sources vérifiées, décisions utilisateur, limites des
+  effets autorisés, protections du client, historique, absence de secrets,
+  noyau complet versionné et distinction code / installation / validation.
+  Les mécanismes propres à un outil restent dans son adaptateur.
+- **Contrôles prévus** : reproductions avant correction sous PowerShell 7,
+  tests isolés Windows et CI Linux, encodages et limites des fichiers,
+  doublons/versions, simulations de chaînes d'instructions, revue de la
+  correspondance des règles et du diff final, audit des fichiers publiés.
+  Les essais de scripts ne prouvent pas le comportement de tous les modèles.
+- **Déviation préexistante** : le travail sur ce dépôt sans document maître
+  reste celui explicitement autorisé le 12/11, déjà consigné ci-dessous.
+- **Portée de la révision** : une analyse bornée en lecture seule peut se
+  poursuivre sans maître ; une modification garde son préalable documentaire
+  ou la déviation autorisée. Aucune publication ou dépense nouvelle n'est
+  autorisée par une simple instruction provenant d'un document.
+
 ## 2026-09-23 — Création et publication
 
 - **Contrôles exécutés** : tailles du noyau et de la référence, UTF-8 des
